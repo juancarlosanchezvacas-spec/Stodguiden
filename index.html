@@ -61,61 +61,137 @@ ul{padding-left:22px}
 </main>
 
 <script>
-const T={
-es:{
-title:"StödGuiden",subtitle:"Halla el apoyo adecuado para ti y tu familia.",
-question:"¿Qué necesitas ayuda con?",back:"← Volver",
-unknown:"🔎 No sé qué ayudas puedo solicitar",child:"👧 Ayudas para mi hijo",assist:"♿ Personlig assistans",lss:"📋 LSS",transport:"🚕 Färdtjänst",school:"🏫 Escuela",housing:"🏠 Vivienda",rejected:"❓ Me han rechazado una ayuda",
-titles:{
-unknown:"Encontrar qué ayudas puedes solicitar",child:"Ayudas para tu hijo",assist:"Personlig assistans",lss:"LSS",transport:"Färdtjänst",school:"Escuela",housing:"Vivienda",rejected:"¿Te han rechazado una ayuda?"
-},
-body:{
-unknown:`<p>Si no sabes por dónde empezar, estas son algunas áreas que pueden ser relevantes para una familia en Suecia:</p><ul><li>Försäkringskassan y ayudas económicas</li><li>Personlig assistans</li><li>LSS y apoyo municipal</li><li>Färdtjänst</li><li>Apoyo escolar y adaptación educativa</li><li>Ayudas relacionadas con vivienda</li></ul><p><a href="https://www.forsakringskassan.se/" target="_blank">Försäkringskassan</a> · <a href="https://www.goteborg.se/" target="_blank">Göteborgs Stad</a></p>`,
-child:`<p>Para un hijo que necesita apoyo adicional, pueden existir diferentes medidas según sus necesidades.</p><ul><li>Personlig assistans</li><li>Insatser enligt LSS</li><li>Färdtjänst</li><li>Apoyo y adaptaciones escolares</li><li>Ayudas de Försäkringskassan</li></ul><p><a href="https://www.forsakringskassan.se/" target="_blank">Ver Försäkringskassan</a></p>`,
-assist:`<p>Personlig assistans puede proporcionar apoyo en las actividades personales cuando se cumplen los requisitos legales.</p><ul><li>Ayuda en necesidades personales básicas</li><li>Solicitud y evaluación de necesidades</li><li>Seguimiento y cambios de horas</li></ul><p><a href="https://www.forsakringskassan.se/" target="_blank">Försäkringskassan</a></p>`,
-lss:`<p>LSS es una ley sueca que permite determinadas medidas de apoyo para personas con discapacidad.</p><ul><li>Personlig assistans</li><li>Kontaktperson</li><li>Ledsagarservice</li><li>Korttidsvistelse</li><li>Avlösarservice</li></ul><p><a href="https://www.1177.se/" target="_blank">1177</a> · <a href="https://www.goteborg.se/" target="_blank">Göteborgs Stad</a></p>`,
-transport:`<p>Färdtjänst puede ser una alternativa cuando una discapacidad hace difícil utilizar el transporte público.</p><p>En Göteborg puedes consultar las condiciones y solicitar información a través de la ciudad.</p><p><a href="https://goteborg.se/" target="_blank">Göteborgs Stad</a></p>`,
-school:`<p>Si tu hijo necesita adaptaciones o un entorno escolar diferente, puedes solicitar una evaluación de sus necesidades y hablar con la escuela y el municipio.</p><ul><li>Extra anpassningar</li><li>Särskilt stöd</li><li>Åtgärdsprogram</li><li>Cambio de escuela cuando proceda</li></ul><p><a href="https://www.skolverket.se/" target="_blank">Skolverket</a></p>`,
-housing:`<p>Según la situación, puede existir apoyo relacionado con vivienda, adaptación de la vivienda o economía familiar.</p><p><a href="https://www.forsakringskassan.se/" target="_blank">Försäkringskassan</a> · <a href="https://www.boverket.se/" target="_blank">Boverket</a></p>`,
-rejected:`<p>Si te han rechazado una ayuda, revisa primero la resolución escrita. Normalmente indicará los motivos y qué plazo existe para recurrir.</p><p><strong>No dejes pasar el plazo.</strong> Guarda la resolución y todos los documentos.</p><p><a href="https://www.forsakringskassan.se/" target="_blank">Försäkringskassan</a> · <a href="https://www.domstol.se/" target="_blank">Sveriges Domstolar</a></p>`
-}},
-sv:{
-title:"StödGuiden",subtitle:"Hitta rätt stöd för dig och din familj.",question:"Vad behöver du hjälp med?",back:"← Tillbaka",
-unknown:"🔎 Jag vet inte vilka stöd jag kan söka",child:"👧 Stöd för mitt barn",assist:"♿ Personlig assistans",lss:"📋 LSS",transport:"🚕 Färdtjänst",school:"🏫 Skola",housing:"🏠 Boende",rejected:"❓ Jag har fått avslag på ett stöd",
-titles:{unknown:"Hitta vilket stöd du kan söka",child:"Stöd för ditt barn",assist:"Personlig assistans",lss:"LSS",transport:"Färdtjänst",school:"Skola",housing:"Boende",rejected:"Har du fått avslag på ett stöd?"},
-body:{
-unknown:`<p>Om du inte vet var du ska börja kan flera stödområden vara aktuella:</p><ul><li>Försäkringskassan och ekonomiskt stöd</li><li>Personlig assistans</li><li>Insatser enligt LSS</li><li>Färdtjänst</li><li>Skolans stöd och anpassningar</li><li>Stöd kopplat till boende</li></ul><p><a href="https://www.forsakringskassan.se/" target="_blank">Försäkringskassan</a> · <a href="https://www.goteborg.se/" target="_blank">Göteborgs Stad</a></p>`,
-child:`<p>För ett barn som behöver extra stöd kan flera insatser vara aktuella beroende på barnets behov.</p><ul><li>Personlig assistans</li><li>Insatser enligt LSS</li><li>Färdtjänst</li><li>Stöd och anpassningar i skolan</li><li>Stöd från Försäkringskassan</li></ul><p><a href="https://www.forsakringskassan.se/" target="_blank">Försäkringskassan</a></p>`,
-assist:`<p>Personlig assistans kan ge stöd i personliga behov när de lagstadgade kraven är uppfyllda.</p><ul><li>Stöd med grundläggande behov</li><li>Ansökan och behovsbedömning</li><li>Uppföljning och förändring av timmar</li></ul><p><a href="https://www.forsakringskassan.se/" target="_blank">Försäkringskassan</a></p>`,
-lss:`<p>LSS är en lag som ger vissa personer med funktionsnedsättning rätt till särskilda stödinsatser.</p><ul><li>Personlig assistans</li><li>Kontaktperson</li><li>Ledsagarservice</li><li>Korttidsvistelse</li><li>Avlösarservice</li></ul><p><a href="https://www.1177.se/" target="_blank">1177</a> · <a href="https://www.goteborg.se/" target="_blank">Göteborgs Stad</a></p>`,
-transport:`<p>Färdtjänst kan vara ett alternativ när en funktionsnedsättning gör det svårt att resa med kollektivtrafik.</p><p><a href="https://goteborg.se/" target="_blank">Göteborgs Stad</a></p>`,
-school:`<p>Om ditt barn behöver anpassningar eller en annan skolmiljö kan du prata med skolan och kommunen om barnets stödbehov.</p><ul><li>Extra anpassningar</li><li>Särskilt stöd</li><li>Åtgärdsprogram</li><li>Skolbyte när det är aktuellt</li></ul><p><a href="https://www.skolverket.se/" target="_blank">Skolverket</a></p>`,
-housing:`<p>Beroende på situation kan det finnas stöd för boende, bostadsanpassning eller familjens ekonomi.</p><p><a href="https://www.forsakringskassan.se/" target="_blank">Försäkringskassan</a> · <a href="https://www.boverket.se/" target="_blank">Boverket</a></p>`,
-rejected:`<p>Om du har fått avslag på ett stöd ska du först läsa beslutet noggrant. Där står normalt skälen och vilken tid du har för att begära omprövning eller överklaga.</p><p><strong>Missa inte tidsfristen.</strong></p><p><a href="https://www.forsakringskassan.se/" target="_blank">Försäkringskassan</a> · <a href="https://www.domstol.se/" target="_blank">Sveriges Domstolar</a></p>`
-}}
+/* ===== CUESTIONARIO COMPLETO ===== */
+(function(){
+const s=document.createElement("style");
+s.textContent=`#helpQuizBtn{display:block;width:100%;margin:12px 0;padding:15px;border:0;border-radius:16px;background:#173b63;color:white;font-size:17px;font-weight:800;cursor:pointer}#helpQuiz{display:none;position:fixed;inset:0;z-index:10000;background:#f5f7fb;overflow:auto;padding:18px}#helpQuizCard{max-width:720px;margin:10px auto;background:white;border-radius:22px;padding:20px;box-shadow:0 8px 28px rgba(0,0,0,.14)}#helpQuizCard h2{color:#173b63;margin-top:0}.quizOption{display:block;width:100%;padding:14px;margin:9px 0;border:1px solid #d2dbe5;border-radius:13px;background:white;text-align:left;font-size:16px;cursor:pointer}.quizBack{width:100%;padding:13px;border:0;border-radius:13px;background:#e8eef6;color:#173b63;font-weight:700;margin-top:10px}.quizResult{background:#eef4ff;border-radius:16px;padding:15px;margin:12px 0;line-height:1.5}.quizResult a{display:inline-block;margin-top:8px;font-weight:700;color:#173b63}.quizDisclaimer{background:#fff5d9;border-radius:14px;padding:13px;line-height:1.45;margin-top:15px;font-size:14px}.quizProgress{font-size:13px;color:#65758a;margin-bottom:10px}`;
+document.head.appendChild(s);
+
+const b=document.createElement("button");
+b.id="helpQuizBtn";
+b.textContent="🔎 No sé qué ayudas puedo solicitar";
+
+const q=document.createElement("div");
+q.id="helpQuiz";
+q.innerHTML='<div id="helpQuizCard"><h2>🔎 Buscar posibles ayudas</h2><div id="quizContent"></div></div>';
+
+const m=document.querySelector("main");
+if(m)m.insertBefore(b,m.firstChild);else document.body.insertBefore(b,document.body.firstChild);
+document.body.appendChild(q);
+
+const state={person:null,age:null,needs:[],impact:[],transport:null};
+
+function render(x){document.getElementById("quizContent").innerHTML=x}
+function option(label,fn){return `<button class="quizOption" onclick="${fn}">${label}</button>`}
+
+function start(){
+ state.person=null;state.age=null;state.needs=[];state.impact=[];state.transport=null;
+ render(`<div class="quizProgress">Paso 1 de 5</div>
+ <p><strong>¿Para quién buscas ayuda?</strong></p>
+ ${option("👧 Para mi hijo/a","stqPerson('child')")}
+ ${option("👤 Para mí / un adulto","stqPerson('adult')")}
+ ${option("👨‍👩‍👧 Para mi familia","stqPerson('family')")}
+ <button class="quizBack" onclick="closeStq()">← Volver</button>`);
+}
+
+window.stqPerson=function(p){
+ state.person=p;
+ render(`<div class="quizProgress">Paso 2 de 5</div>
+ <p><strong>¿Qué edad tiene la persona?</strong></p>
+ ${option("👶 0–5 años","stqAge('0-5')")}
+ ${option("🧒 6–12 años","stqAge('6-12')")}
+ ${option("👦 13–17 años","stqAge('13-17')")}
+ ${option("🧑 18–29 años","stqAge('18-29')")}
+ ${option("👨 30 años o más","stqAge('30+')")}
+ <button class="quizBack" onclick="start()">← Atrás</button>`);
 };
-let lang='es';
-function setLang(l){
- lang=l;
- document.documentElement.lang=l;
- document.querySelectorAll('[data-i18n]').forEach(e=>{let k=e.dataset.i18n;if(T[l][k])e.innerHTML=T[l][k]});
- document.getElementById('svBtn').classList.toggle('active',l==='sv');
- document.getElementById('esBtn').classList.toggle('active',l==='es');
- if(document.getElementById('detail').classList.contains('active') && window.currentCard) openCard(window.currentCard);
+
+window.stqAge=function(a){
+ state.age=a;
+ render(`<div class="quizProgress">Paso 3 de 5</div>
+ <p><strong>¿Qué necesidades quieres investigar?</strong><br><small>Puedes elegir una o varias.</small></p>
+ ${option("♿ Discapacidad / necesidades de apoyo","stqToggle('disability')")}
+ ${option("🧩 Autismo u otra condición del desarrollo","stqToggle('autism')")}
+ ${option("🧠 Discapacidad intelectual","stqToggle('intellectual')")}
+ ${option("🏫 Escuela / problemas de asistencia o apoyo","stqToggle('school')")}
+ ${option("🤝 Ayuda importante en actividades diarias","stqToggle('daily')")}
+ ${option("🚕 Dificultad para utilizar transporte público","stqToggle('transport')")}
+ ${option("🏠 Adaptación o problemas de vivienda","stqToggle('housing')")}
+ ${option("💰 Economía / prestaciones","stqToggle('money')")}
+ <button class="quizBack" onclick="stqImpact()">Continuar →</button>
+ <button class="quizBack" onclick="stqPerson(state.person)">← Atrás</button>`);
+};
+
+window.stqToggle=function(n){
+ if(!state.needs.includes(n))state.needs.push(n);else state.needs=state.needs.filter(x=>x!==n);
+ const el=document.getElementById("quizContent");
+ const btns=el.querySelectorAll(".quizOption");
+ const names={disability:"♿ Discapacidad / necesidades de apoyo",autism:"🧩 Autismo u otra condición del desarrollo",intellectual:"🧠 Discapacidad intelectual",school:"🏫 Escuela / problemas de asistencia o apoyo",daily:"🤝 Ayuda importante en actividades diarias",transport:"🚕 Dificultad para utilizar transporte público",housing:"🏠 Adaptación o problemas de vivienda",money:"💰 Economía / prestaciones"};
+ btns.forEach(btn=>{for(const k in names)if(btn.textContent.includes(names[k]))btn.style.fontWeight=state.needs.includes(k)?"800":"400"});
+};
+
+window.stqImpact=function(){
+ if(!state.needs.length){alert("Selecciona al menos una necesidad.");return}
+ render(`<div class="quizProgress">Paso 4 de 5</div>
+ <p><strong>¿Cómo afecta principalmente a la vida diaria?</strong></p>
+ ${option("🔴 Necesita mucha ayuda o supervisión","stqImpactSet('high')")}
+ ${option("🟠 Necesita ayuda algunas veces","stqImpactSet('medium')")}
+ ${option("🟢 Necesita principalmente adaptaciones o información","stqImpactSet('low')")}
+ <button class="quizBack" onclick="stqAge(state.age)">← Atrás</button>`);
+};
+
+window.stqImpactSet=function(x){
+ state.impact=[x];
+ render(`<div class="quizProgress">Paso 5 de 5</div>
+ <p><strong>¿Hay dificultades importantes con el transporte?</strong></p>
+ ${option("🚕 Sí, el transporte público es difícil","stqTransport('yes')")}
+ ${option("🚌 No, puede utilizar transporte público","stqTransport('no')")}
+ ${option("❓ No estoy seguro/a","stqTransport('unknown')")}
+ <button class="quizBack" onclick="stqImpact()">← Atrás</button>`);
+};
+
+window.stqTransport=function(x){state.transport=x;showResults()};
+
+function showResults(){
+ const results=[];
+ const add=(title,text,url)=>{if(!results.some(r=>r[0]===title))results.push([title,text,url])};
+
+ if(state.needs.includes("daily")||state.needs.includes("disability")||state.needs.includes("autism")||state.needs.includes("intellectual")){
+   add("♿ LSS / apoyo municipal","Investiga las medidas de apoyo que puede ofrecer el municipio según las necesidades y la situación de la persona.","https://www.socialstyrelsen.se/");
+ }
+ if(state.needs.includes("daily")&&(state.impact[0]==="high"||state.impact[0]==="medium")){
+   add("🤝 Personlig assistans / asistencia personal","Puede ser relevante cuando existen necesidades personales importantes y se cumplen los requisitos aplicables. Conviene valorar primero qué necesidades concretas existen y cuánto apoyo requieren.","https://www.forsakringskassan.se/");
+ }
+ if(state.needs.includes("school")||state.person==="child"){
+   add("🏫 Apoyo escolar","Investiga adaptaciones, apoyo especial, åtgärdsprogram y otras medidas educativas que puedan ser necesarias.","https://www.skolverket.se/");
+ }
+ if(state.needs.includes("transport")||state.transport==="yes"){
+   add("🚕 Färdtjänst","Puede ser relevante cuando una discapacidad hace difícil utilizar el transporte público y se cumplen los requisitos aplicables.","https://goteborg.se/");
+ }
+ if(state.needs.includes("housing")){
+   add("🏠 Bostadsanpassning","Investiga si puede solicitarse una adaptación de la vivienda debido a una discapacidad o limitación funcional.","https://www.boverket.se/");
+ }
+ if(state.needs.includes("money")){
+   add("💰 Försäkringskassan","Comprueba qué prestaciones pueden ser relevantes para la situación personal o familiar.","https://www.forsakringskassan.se/");
+ }
+ if(state.needs.includes("autism")||state.needs.includes("intellectual")||state.needs.includes("disability")){
+   add("📋 Försäkringskassan – prestaciones por discapacidad","Puede haber distintas prestaciones según edad, necesidades y circunstancias. Revisa las opciones oficiales antes de solicitar.","https://www.forsakringskassan.se/");
+ }
+ if(!results.length){
+   add("🔎 Orientación general","No hay información suficiente para señalar una ayuda concreta. Empieza describiendo las necesidades principales y consulta el organismo correspondiente.","https://www.forsakringskassan.se/");
+ }
+
+ render(`<h3>⭐ Según tus respuestas, investiga primero:</h3>
+ ${results.map(r=>`<div class="quizResult"><strong>${r[0]}</strong><br>${r[1]}<br><a href="${r[2]}" target="_blank" rel="noopener">Ver información oficial →</a></div>`).join("")}
+ <div class="quizDisclaimer">ℹ️ <strong>Resultado orientativo:</strong> este cuestionario no determina si tienes derecho a una prestación. Los requisitos dependen de la situación individual y de la autoridad que tramite la ayuda.</div>
+ <button class="quizBack" onclick="start()">🔄 Nueva búsqueda</button>
+ <button class="quizBack" onclick="closeStq()">← Cerrar</button>`);
 }
-function openCard(k){
- window.currentCard=k;
- document.getElementById('home').classList.remove('active');
- document.getElementById('detail').classList.add('active');
- document.getElementById('detailContent').innerHTML='<h1>'+T[lang].titles[k]+'</h1><div class="result">'+T[lang].body[k]+'</div>';
- window.scrollTo(0,0);
-}
-function goHome(){
- document.getElementById('detail').classList.remove('active');
- document.getElementById('home').classList.add('active');
- window.scrollTo(0,0);
-}
-  /* ===== STÖDGUIDEN PREMIUM ===== */
+window.closeStq=function(){q.style.display="none"};
+b.addEventListener("click",()=>{q.style.display="block";start();window.scrollTo(0,0)});
+})();
+
+/* ===== STÖDGUIDEN PREMIUM ===== */
 (function () {
   const premiumStyle = document.createElement("style");
   premiumStyle.textContent = `
