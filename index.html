@@ -266,6 +266,26 @@ b.addEventListener("click",()=>{q.style.display="block";start();window.scrollTo(
   };
 })();
 
+
+/* ===== IDIOMAS ===== */
+const T={
+ es:{title:'StödGuiden',subtitle:'Halla el apoyo adecuado para ti y tu familia.',question:'¿Qué necesitas ayuda con?',unknown:'🔎 No sé qué ayudas puedo solicitar',child:'👧 Ayudas para mi hijo',assist:'♿ Asistencia personal',lss:'📋 LSS',transport:'🚕 Färdtjänst',school:'🏫 Escuela',housing:'🏠 Vivienda',rejected:'❓ Me han rechazado una ayuda',back:'← Volver',titles:{unknown:'No sé qué ayudas puedo solicitar',child:'Ayudas para mi hijo',assist:'Asistencia personal',lss:'LSS',transport:'Färdtjänst',school:'Escuela',housing:'Vivienda',rejected:'Me han rechazado una ayuda'},body:{unknown:'Aquí puedes utilizar el cuestionario para orientarte sobre qué apoyos puede ser útil investigar según tu situación.',child:'Aquí puedes orientarte sobre apoyos que una familia puede investigar según las necesidades del niño o adolescente.',assist:'La asistencia personal puede ser relevante cuando existen necesidades importantes y duraderas de ayuda personal y se cumplen los requisitos aplicables.',lss:'LSS es una ley sueca que regula determinados apoyos para personas con discapacidad.',transport:'Färdtjänst es transporte especial para personas que tienen dificultades importantes para viajar con el transporte público ordinario.',school:'Si un niño necesita apoyo en la escuela, es importante hablar con la escuela y documentar las necesidades.',housing:'Algunas personas pueden necesitar adaptaciones o apoyos relacionados con la vivienda.',rejected:'Si has recibido una decisión negativa, primero revisa la resolución y los motivos indicados.'}},
+ sv:{title:'StödGuiden',subtitle:'Hitta rätt stöd för dig och din familj.',question:'Vad behöver du hjälp med?',unknown:'🔎 Jag vet inte vilket stöd jag kan söka',child:'👧 Stöd för mitt barn',assist:'♿ Personlig assistans',lss:'📋 LSS',transport:'🚕 Färdtjänst',school:'🏫 Skola',housing:'🏠 Bostad',rejected:'❓ Jag har fått avslag på stöd',back:'← Tillbaka',titles:{unknown:'Jag vet inte vilket stöd jag kan söka',child:'Stöd för mitt barn',assist:'Personlig assistans',lss:'LSS',transport:'Färdtjänst',school:'Skola',housing:'Bostad',rejected:'Jag har fått avslag på stöd'},body:{unknown:'Här kan du använda frågeformuläret för att få en första vägledning om vilket stöd som kan vara relevant att undersöka utifrån din situation.',child:'Här kan du få en första orientering om stöd som en familj kan undersöka utifrån barnets behov.',assist:'Personlig assistans kan vara aktuell när en person har omfattande och varaktiga behov av personlig hjälp och kraven är uppfyllda.',lss:'LSS är en svensk lag som reglerar vissa stödinsatser för personer med funktionsnedsättning.',transport:'Färdtjänst är särskild kollektivtrafik för personer som har betydande svårigheter att resa med vanlig kollektivtrafik.',school:'Om ett barn behöver stöd i skolan är det viktigt att prata med skolan och dokumentera behoven.',housing:'Vissa personer kan behöva anpassningar eller stöd som rör bostaden.',rejected:'Om du har fått ett negativt beslut bör du först läsa beslutet och skälen som anges.'}}
+};
+let lang='es';
+function setLang(l){
+ lang=l;
+ const t=T[l];
+ document.documentElement.lang=l;
+ document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k])el.textContent=t[k]});
+ const sv=document.getElementById('svBtn'), es=document.getElementById('esBtn');
+ if(sv)sv.classList.toggle('active',l==='sv');
+ if(es)es.classList.toggle('active',l==='es');
+ const quizBtn=document.getElementById('helpQuizBtn');
+ if(quizBtn)quizBtn.textContent=l==='sv'?'🔎 Jag vet inte vilket stöd jag kan söka':'🔎 No sé qué ayudas puedo solicitar';
+ if(document.getElementById('detail')?.classList.contains('active') && window.currentCard)openCard(window.currentCard);
+}
+
 </script>
 </body>
 </html>
