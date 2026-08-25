@@ -115,6 +115,179 @@ function goHome(){
  document.getElementById('home').classList.add('active');
  window.scrollTo(0,0);
 }
+  /* ===== STÖDGUIDEN PREMIUM ===== */
+
+(function () {
+
+  const premiumStyle = document.createElement("style");
+  premiumStyle.textContent = `
+    #premiumBtn{
+      display:block;
+      width:100%;
+      margin:18px 0;
+      padding:16px;
+      border:0;
+      border-radius:18px;
+      background:#d9a441;
+      color:#172b4d;
+      font-size:18px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 4px 12px rgba(0,0,0,.15);
+    }
+
+    #premiumBox{
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      background:rgba(0,0,0,.65);
+      padding:20px;
+      overflow:auto;
+    }
+
+    #premiumContent{
+      max-width:650px;
+      margin:30px auto;
+      background:white;
+      color:#17304d;
+      border-radius:24px;
+      padding:25px;
+      box-shadow:0 10px 40px rgba(0,0,0,.3);
+    }
+
+    #premiumContent h2{
+      text-align:center;
+      font-size:28px;
+      margin-top:5px;
+    }
+
+    .premiumItem{
+      background:#eef4ff;
+      padding:15px;
+      border-radius:15px;
+      margin:12px 0;
+    }
+
+    .premiumClose{
+      width:100%;
+      padding:13px;
+      margin-top:15px;
+      border:0;
+      border-radius:14px;
+      background:#e8eef6;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    .premiumSoon{
+      text-align:center;
+      padding:15px;
+      background:#fff5d9;
+      border-radius:15px;
+      margin-top:18px;
+    }
+  `;
+  document.head.appendChild(premiumStyle);
+
+
+  /* Botón Premium */
+  const premiumBtn = document.createElement("button");
+  premiumBtn.id = "premiumBtn";
+  premiumBtn.innerHTML = "⭐ StödGuiden Premium";
+  
+  const main = document.querySelector("main");
+
+  if(main){
+    main.insertBefore(premiumBtn, main.firstChild);
+  } else {
+    document.body.insertBefore(premiumBtn, document.body.firstChild);
+  }
+
+
+  /* Ventana Premium */
+  const premiumBox = document.createElement("div");
+  premiumBox.id = "premiumBox";
+
+  premiumBox.innerHTML = `
+    <div id="premiumContent">
+
+      <h2>⭐ StödGuiden Premium</h2>
+
+      <p style="text-align:center">
+        Herramientas y guías más completas para familias
+        que necesitan apoyo en Suecia.
+      </p>
+
+      <div class="premiumItem">
+        <strong>📋 Guías paso a paso</strong>
+        <p>
+          Cómo solicitar ayudas y qué documentación preparar.
+        </p>
+      </div>
+
+      <div class="premiumItem">
+        <strong>✉️ Modelos de mensajes</strong>
+        <p>
+          Textos preparados para Försäkringskassan,
+          escuela, municipio y otros organismos.
+        </p>
+      </div>
+
+      <div class="premiumItem">
+        <strong>💰 Ayudas económicas</strong>
+        <p>
+          Información organizada sobre las principales
+          ayudas y prestaciones.
+        </p>
+      </div>
+
+      <div class="premiumItem">
+        <strong>🏫 Escuela</strong>
+        <p>
+          Orientación para solicitar adaptaciones,
+          apoyo especial y cambio de escuela.
+        </p>
+      </div>
+
+      <div class="premiumItem">
+        <strong>♿ LSS y discapacidad</strong>
+        <p>
+          Explicaciones sencillas sobre los apoyos
+          disponibles y cómo empezar.
+        </p>
+      </div>
+
+      <div class="premiumItem">
+        <strong>🚕 Färdtjänst</strong>
+        <p>
+          Guía para entender y solicitar el transporte
+          adaptado.
+        </p>
+      </div>
+
+      <div class="premiumSoon">
+        🔒 <strong>Contenido Premium</strong><br>
+        Estamos preparando las herramientas completas.
+      </div>
+
+      <button class="premiumClose" onclick="
+        document.getElementById('premiumBox').style.display='none'
+      ">
+        ← Volver
+      </button>
+
+    </div>
+  `;
+
+  document.body.appendChild(premiumBox);
+
+
+  premiumBtn.addEventListener("click", function(){
+    premiumBox.style.display = "block";
+  });
+
+})();
 </script>
 </body>
 </html>
