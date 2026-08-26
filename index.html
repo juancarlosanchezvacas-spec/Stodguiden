@@ -172,10 +172,38 @@ window.stqCurrent=function(c){
  }
 
  const vals=Object.values(result);
+ const links={
+  assist:"https://www.forsakringskassan.se/",
+  lss:"https://goteborg.se/",
+  school:"https://www.skolverket.se/",
+  transport:"https://goteborg.se/",
+  money:"https://www.forsakringskassan.se/",
+  housing:"https://www.boverket.se/",
+  rejected:"https://www.forsakringskassan.se/"
+ };
+ const nextEs={
+  assist:"Siguiente paso: describe ejemplos concretos de la ayuda necesaria, con frecuencia y duración, y comprueba la información oficial.",
+  lss:"Siguiente paso: comprueba qué insats de LSS puede corresponder y quién tramita la solicitud.",
+  school:"Siguiente paso: habla con la escuela y pide que las necesidades y medidas de apoyo queden documentadas.",
+  transport:"Siguiente paso: comprueba los requisitos de Färdtjänst y cómo se solicita en tu municipio/región.",
+  money:"Siguiente paso: revisa las prestaciones de Försäkringskassan relacionadas con tu situación.",
+  housing:"Siguiente paso: describe qué problema existe en la vivienda y qué adaptación se necesita.",
+  rejected:"Siguiente paso: revisa la resolución, los motivos y el plazo para omprövning/överklagande."
+ };
+ const nextSv={
+  assist:"Nästa steg: beskriv konkreta hjälpbehov, hur ofta de uppstår och hur länge hjälpen behövs, och kontrollera officiell information.",
+  lss:"Nästa steg: kontrollera vilken LSS-insats som kan vara aktuell och vem som handlägger ansökan.",
+  school:"Nästa steg: prata med skolan och be att behoven och stödåtgärderna dokumenteras.",
+  transport:"Nästa steg: kontrollera kraven för färdtjänst och hur ansökan görs i din kommun/region.",
+  money:"Nästa steg: undersök Försäkringskassans ersättningar som kan vara relevanta för din situation.",
+  housing:"Nästa steg: beskriv problemet i bostaden och vilken anpassning som behövs.",
+  rejected:"Nästa steg: gå igenom beslutet, skälen och tidsfristen för omprövning/överklagande."
+ };
+ const keys=Object.keys(result);
  render(`<h2>⭐ ${es()?"Orientación inicial":"Första vägledning"}</h2>
- <p>${es()?"Según tus respuestas, estas son las áreas que merece la pena investigar:":"Utifrån dina svar är detta områden som kan vara värda att undersöka:"}</p>
- ${vals.map(x=>`<div class="quizResult"><strong>${x[0]}</strong><br>${x[1]}</div>`).join("")}
- <div class="quizNote">ℹ️ ${es()?"Resultado orientativo. No determina si tienes derecho a una ayuda concreta.":"Detta är generell vägledning och avgör inte om du har rätt till en viss insats."}</div>
+ <p>${es()?"Según tus respuestas, estas son las áreas que merece la pena investigar primero:":"Utifrån dina svar är detta områden som kan vara värda att undersöka först:"}</p>
+ ${vals.map((x,i)=>{const k=keys[i];const next=es()?nextEs[k]:nextSv[k];return `<div class="quizResult"><strong>${x[0]}</strong><br>${x[1]}<br><br><strong>${es()?"Qué hacer ahora:":"Vad du kan göra nu:"}</strong> ${next}<br><br><a href="${links[k]||"https://www.forsakringskassan.se/"}" target="_blank" rel="noopener">${es()?"Ver información oficial →":"Se officiell information →"}</a></div>`}).join("")}
+ <div class="quizNote">ℹ️ ${es()?"Resultado orientativo. No determina si tienes derecho a una ayuda concreta. Comprueba siempre los requisitos oficiales.":"Detta är generell vägledning och avgör inte om du har rätt till en viss insats. Kontrollera alltid de officiella kraven."}</div>
  <button class="quizOption" onclick="start()">🔄 ${es()?"Nueva búsqueda":"Ny sökning"}</button>
  <button class="quizBack" onclick="closeStq()">← ${es()?"Cerrar":"Stäng"}</button>`);
 };
