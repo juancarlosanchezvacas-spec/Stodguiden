@@ -64,17 +64,128 @@ ul{padding-left:22px}
 /* ===== CUESTIONARIO ===== */
 (function(){
 const s=document.createElement("style");
-s.textContent=`#helpQuizBtn{display:block;width:100%;margin:12px 0;padding:15px;border:0;border-radius:16px;background:#173b63;color:white;font-size:17px;font-weight:800}#helpQuiz{display:none;position:fixed;inset:0;z-index:10000;background:#f5f7fb;overflow:auto;padding:18px}#helpQuizCard{max-width:720px;margin:10px auto;background:white;border-radius:22px;padding:20px;box-shadow:0 8px 28px rgba(0,0,0,.14)}.quizOption{display:block;width:100%;padding:14px;margin:9px 0;border:1px solid #d2dbe5;border-radius:13px;background:white;text-align:left;font-size:16px}.quizBack{width:100%;padding:13px;border:0;border-radius:13px;background:#e8eef6;color:#173b63;font-weight:700;margin-top:10px}.quizResult{background:#eef4ff;border-radius:16px;padding:15px;margin:12px 0;line-height:1.5}.quizDisclaimer{background:#fff5d9;border-radius:14px;padding:13px;line-height:1.45;margin-top:15px;font-size:14px}`;
+s.textContent=`#helpQuiz{display:none;position:fixed;inset:0;z-index:10000;background:#f5f7fb;overflow:auto;padding:18px}#helpQuizCard{max-width:720px;margin:10px auto;background:white;border-radius:22px;padding:20px;box-shadow:0 8px 28px rgba(0,0,0,.14)}.quizOption{display:block;width:100%;padding:14px;margin:9px 0;border:1px solid #d2dbe5;border-radius:13px;background:white;text-align:left;font-size:16px;cursor:pointer}.quizOption.selected{background:#eef4ff;border-color:#2f61aa}.quizBack{width:100%;padding:13px;border:0;border-radius:13px;background:#e8eef6;color:#173b63;font-weight:700;margin-top:10px}.quizResult{background:#eef4ff;border-radius:16px;padding:15px;margin:12px 0;line-height:1.5}.quizNote{background:#fff5d9;border-radius:14px;padding:13px;line-height:1.45;margin-top:15px;font-size:14px}`;
 document.head.appendChild(s);
-const b=document.createElement("button");b.id="helpQuizBtn";b.textContent="🔎 No sé qué ayudas puedo solicitar";
-const q=document.createElement("div");q.id="helpQuiz";q.innerHTML='<div id="helpQuizCard"><h2>🔎 Buscar posibles ayudas</h2><div id="quizContent"></div></div>';
-const m=document.querySelector("main");if(m)m.insertBefore(b,m.firstChild);else document.body.insertBefore(b,document.body.firstChild);document.body.appendChild(q);
-const state={person:null};
-function render(x){document.getElementById("quizContent").innerHTML=x}
-function start(){render('<p><strong>1. ¿Para quién buscas ayuda?</strong></p><button class="quizOption" onclick="stqPerson(\'child\')">👧 Para mi hijo/a</button><button class="quizOption" onclick="stqPerson(\'adult\')">👤 Para mí / un adulto</button><button class="quizOption" onclick="stqPerson(\'family\')">👨‍👩‍👧 Para mi familia</button><button class="quizBack" onclick="closeStq()">← Volver</button>')}
-window.stqPerson=function(p){state.person=p;render('<p><strong>2. ¿Cuál es la principal necesidad?</strong></p><button class="quizOption" onclick="stqNeed(\'disability\')">♿ Discapacidad o necesidades de apoyo</button><button class="quizOption" onclick="stqNeed(\'school\')">🏫 Escuela y educación</button><button class="quizOption" onclick="stqNeed(\'daily\')">🤝 Ayuda en la vida diaria</button><button class="quizOption" onclick="stqNeed(\'transport\')">🚕 Transporte</button><button class="quizOption" onclick="stqNeed(\'housing\')">🏠 Vivienda</button><button class="quizOption" onclick="stqNeed(\'money\')">💰 Economía o prestaciones</button><button class="quizBack" onclick="start()">← Atrás</button>')}
-window.stqNeed=function(n){const r={disability:[["♿ LSS / apoyo municipal","Puede ser relevante cuando existe una discapacidad y necesidades importantes de apoyo."],["💰 Försäkringskassan","Puede haber prestaciones relacionadas con discapacidad y necesidades de apoyo, según la situación."]],school:[["🏫 Apoyo escolar","Pregunta por adaptaciones, apoyo especial y documentación de las necesidades del alumno."],["🏛️ Municipio","Puede ser necesario contactar con el municipio para cuestiones relacionadas con escuela o apoyo."]],daily:[["🤝 Personlig assistans","Puede ser relevante cuando existen necesidades personales de ayuda que cumplen los requisitos aplicables."],["♿ LSS","Comprueba qué medidas de apoyo pueden existir según la situación y el municipio."]],transport:[["🚕 Färdtjänst","Puede ser una opción cuando una discapacidad dificulta desplazarse con transporte público y se cumplen los requisitos."],["🏛️ Municipio / región","Comprueba quién gestiona la solicitud y los requisitos aplicables."]],housing:[["🏠 Bostadsanpassning","Puede ser relevante si una discapacidad hace necesaria una adaptación de la vivienda."],["💰 Apoyo económico","Según la situación pueden existir otras formas de apoyo relacionadas con vivienda o economía."]],money:[["💰 Försäkringskassan","Comprueba qué prestaciones pueden corresponder según la situación personal o familiar."],["🏛️ Municipio","Puede haber ayudas municipales que convenga investigar."]]};render("<h3>⭐ Posibles vías de ayuda</h3><p>Según tus respuestas, estas son áreas que puede valer la pena investigar:</p>"+r[n].map(x=>`<div class="quizResult"><strong>${x[0]}</strong><br>${x[1]}</div>`).join("")+'<div class="quizDisclaimer">ℹ️ Este resultado es <strong>orientativo</strong>. No determina si tienes derecho a una prestación.</div><button class="quizBack" onclick="start()">🔄 Nueva búsqueda</button><button class="quizBack" onclick="closeStq()">← Cerrar</button>')}
-window.closeStq=function(){q.style.display="none"};b.addEventListener("click",()=>{q.style.display="block";start()});
+
+const q=document.createElement("div");
+q.id="helpQuiz";
+q.innerHTML='<div id="helpQuizCard"><div id="quizContent"></div></div>';
+document.body.appendChild(q);
+
+const state={person:null,needs:[],night:false,current:null};
+
+function es(){return lang==="es"}
+function render(html){document.getElementById("quizContent").innerHTML=html}
+function open(){q.style.display="block";start()}
+function close(){q.style.display="none"}
+
+function start(){
+ state.person=null;state.needs=[];state.night=false;state.current=null;
+ render(`<h2>${es()?"🔎 Buscar posibles ayudas":"🔎 Hitta möjliga stöd"}</h2>
+ <p>${es()?"Responde a unas preguntas y te mostraremos áreas de apoyo que puede valer la pena investigar.":"Svara på några frågor så visar vi stödområden som kan vara värda att undersöka."}</p>
+ <strong>${es()?"1. ¿Para quién buscas ayuda?":"1. Vem söker du stöd för?"}</strong>
+ <button class="quizOption" onclick="stqPerson('child')">👧 ${es()?"Mi hijo/a":"Mitt barn"}</button>
+ <button class="quizOption" onclick="stqPerson('adult')">👤 ${es()?"Para mí / un adulto":"För mig / en vuxen"}</button>
+ <button class="quizOption" onclick="stqPerson('family')">👨‍👩‍👧 ${es()?"Para mi familia":"För min familj"}</button>
+ <button class="quizBack" onclick="closeStq()">← ${es()?"Cerrar":"Stäng"}</button>`);
+}
+
+window.stqPerson=function(p){
+ state.person=p;
+ render(`<h2>${es()?"2. ¿Qué necesitas principalmente?":"2. Vad behöver du främst hjälp med?"}</h2>
+ <p>${es()?"Puedes elegir varias opciones.":"Du kan välja flera alternativ."}</p>
+ ${[
+ ["daily",es()?"🤝 Ayuda en la vida diaria":"🤝 Stöd i vardagen"],
+ ["school",es()?"🏫 Escuela / educación":"🏫 Skola / utbildning"],
+ ["transport",es()?"🚕 Transporte":"🚕 Transport"],
+ ["night",es()?"🌙 Ayuda o supervisión por la noche":"🌙 Hjälp eller tillsyn på natten"],
+ ["money",es()?"💰 Economía / prestaciones":"💰 Ekonomi / ersättningar"],
+ ["housing",es()?"🏠 Vivienda":"🏠 Boende"]
+ ].map(x=>`<button class="quizOption" onclick="stqToggle('${x[0]}',this)">${x[1]}</button>`).join("")}
+ <button class="quizOption" onclick="stqNext()">➡️ ${es()?"Continuar":"Fortsätt"}</button>
+ <button class="quizBack" onclick="start()">← ${es()?"Atrás":"Tillbaka"}</button>`);
+};
+
+window.stqToggle=function(n,b){
+ if(n==="night"){state.night=!state.night;b.classList.toggle("selected",state.night);return}
+ const i=state.needs.indexOf(n);
+ if(i>=0){state.needs.splice(i,1);b.classList.remove("selected")}
+ else{state.needs.push(n);b.classList.add("selected")}
+};
+
+window.stqNext=function(){
+ if(!state.needs.length && !state.night){
+   render(`<h3>ℹ️ ${es()?"Selecciona al menos una necesidad":"Välj minst ett behov"}</h3>
+   <button class="quizBack" onclick="stqPerson('${state.person}')">← ${es()?"Volver":"Tillbaka"}</button>`);
+   return;
+ }
+ render(`<h2>${es()?"3. ¿Cuál es tu situación actual?":"3. Vilken situation har du nu?"}</h2>
+ <button class="quizOption" onclick="stqCurrent('more')">➕ ${es()?"Ya recibo alguna ayuda y necesito más":"Jag har redan stöd men behöver mer"}</button>
+ <button class="quizOption" onclick="stqCurrent('waiting')">⏳ ${es()?"Estoy esperando una decisión":"Jag väntar på ett beslut"}</button>
+ <button class="quizOption" onclick="stqCurrent('rejected')">❌ ${es()?"Me han rechazado una ayuda":"Jag har fått avslag på ett stöd"}</button>
+ <button class="quizOption" onclick="stqCurrent('none')">📝 ${es()?"Todavía no he solicitado ninguna ayuda":"Jag har ännu inte ansökt om stöd"}</button>
+ <button class="quizBack" onclick="stqPerson('${state.person}')">← ${es()?"Atrás":"Tillbaka"}</button>`);
+};
+
+window.stqCurrent=function(c){
+ state.current=c;
+ const result={};
+ const add=(key,title,body)=>{if(!result[key])result[key]=[title,body]};
+
+ if(state.needs.includes("daily")){
+   add("assist",es()?"♿ Personlig assistans":"♿ Personlig assistans",
+     es()?"Puede ser relevante investigar asistencia personal y otras medidas de apoyo cuando existen necesidades personales importantes.":"Det kan vara relevant att undersöka personlig assistans och andra stödinsatser när det finns omfattande personliga behov.");
+   add("lss",es()?"📋 LSS":"📋 LSS",
+     es()?"Investiga qué insatser de LSS pueden corresponder a la situación.":"Undersök vilka LSS-insatser som kan vara aktuella.");
+ }
+ if(state.needs.includes("school")){
+   add("school",es()?"🏫 Escuela":"🏫 Skola",
+     es()?"Puede ser útil hablar con la escuela sobre adaptaciones, apoyo especial y las necesidades del alumno.":"Det kan vara bra att prata med skolan om anpassningar, särskilt stöd och elevens behov.");
+ }
+ if(state.needs.includes("transport")){
+   add("transport",es()?"🚕 Färdtjänst":"🚕 Färdtjänst",
+     es()?"Comprueba si Färdtjänst puede ser una vía adecuada y revisa los requisitos aplicables.":"Kontrollera om färdtjänst kan vara aktuell och vilka krav som gäller.");
+ }
+ if(state.needs.includes("money")){
+   add("money",es()?"💰 Försäkringskassan":"💰 Försäkringskassan",
+     es()?"Comprueba qué prestaciones pueden ser relevantes para tu situación.":"Undersök vilka ersättningar som kan vara aktuella för din situation.");
+ }
+ if(state.needs.includes("housing")){
+   add("housing",es()?"🏠 Vivienda":"🏠 Boende",
+     es()?"Investiga apoyo relacionado con vivienda o adaptación de la vivienda cuando corresponda.":"Undersök stöd för boende eller bostadsanpassning när det är aktuellt.");
+ }
+ if(state.night){
+   add("night",es()?"🌙 Necesidades durante la noche":"🌙 Behov på natten",
+     es()?"Anota con qué frecuencia se despierta la persona, qué ayuda necesita y cuánto dura cada episodio. Esa información puede ser útil al explicar las necesidades de apoyo.":"Anteckna hur ofta personen vaknar, vilken hjälp som behövs och hur länge varje episod varar. Det kan vara viktigt när stödbehovet ska beskrivas.");
+ }
+ if(state.current==="rejected"){
+   add("rejected",es()?"❌ Ayuda rechazada":"❌ Avslag på stöd",
+     es()?"Revisa la resolución, los motivos y el plazo indicado para omprövning o överklagande.":"Läs beslutet noggrant, kontrollera skälen och tidsfristen för omprövning eller överklagande.");
+ }
+ if(state.current==="more"){
+   add("more",es()?"➕ Necesitas más apoyo":"➕ Du behöver mer stöd",
+     es()?"Como ya recibes apoyo, reúne ejemplos concretos de las necesidades que no están cubiertas y cuándo aparecen.":"Eftersom du redan har stöd, samla konkreta exempel på behov som inte täcks och när de uppstår.");
+ }
+ if(state.current==="waiting"){
+   add("waiting",es()?"⏳ Esperando una decisión":"⏳ Väntar på beslut",
+     es()?"Guarda la solicitud y la documentación enviada y anota la fecha de contacto o solicitud.":"Spara ansökan och inskickade handlingar och anteckna datum för kontakt eller ansökan.");
+ }
+
+ const vals=Object.values(result);
+ render(`<h2>⭐ ${es()?"Orientación inicial":"Första vägledning"}</h2>
+ <p>${es()?"Según tus respuestas, estas son las áreas que merece la pena investigar:":"Utifrån dina svar är detta områden som kan vara värda att undersöka:"}</p>
+ ${vals.map(x=>`<div class="quizResult"><strong>${x[0]}</strong><br>${x[1]}</div>`).join("")}
+ <div class="quizNote">ℹ️ ${es()?"Resultado orientativo. No determina si tienes derecho a una ayuda concreta.":"Detta är generell vägledning och avgör inte om du har rätt till en viss insats."}</div>
+ <button class="quizOption" onclick="start()">🔄 ${es()?"Nueva búsqueda":"Ny sökning"}</button>
+ <button class="quizBack" onclick="closeStq()">← ${es()?"Cerrar":"Stäng"}</button>`);
+};
+
+window.closeStq=close;
+
+/* El botón principal de "no sé qué ayudas..." abre directamente el cuestionario. */
+document.querySelectorAll('[data-card="unknown"]').forEach(function(btn){
+ btn.addEventListener("click",function(e){e.preventDefault();open()});
+});
 })();
 
 const T={
