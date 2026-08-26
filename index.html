@@ -173,13 +173,36 @@ window.stqCurrent=function(c){
 
  const vals=Object.values(result);
  const links={
-  assist:"https://www.forsakringskassan.se/",
+  assist:"https://www.forsakringskassan.se/privatperson/vuxen-med-funktionsnedsattning/assistansersattning/sa-beraknas-grundlaggande-behov",
   lss:"https://goteborg.se/",
   school:"https://www.skolverket.se/",
   transport:"https://goteborg.se/",
   money:"https://www.forsakringskassan.se/",
   housing:"https://www.boverket.se/",
   rejected:"https://www.forsakringskassan.se/"
+ };
+ const official={
+  assist:es()
+   ?"Comprueba especialmente si la necesidad se refiere a higiene personal, comidas, vestirse/desvestirse, comunicación, prevención de daños por una discapacidad psíquica o apoyo continuo por una condición médica."
+   :"Kontrollera särskilt om behovet gäller personlig hygien, måltider, av- och påklädning, kommunikation, stöd för att förebygga skada eller löpande stöd på grund av ett medicinskt tillstånd.",
+  lss:es()
+   ?"Comprueba qué insats de LSS puede ser relevante y quién la tramita en tu municipio."
+   :"Kontrollera vilken LSS-insats som kan vara aktuell och vem som handlägger den i din kommun.",
+  school:es()
+   ?"Pregunta por extra anpassningar y, cuando proceda, särskilt stöd y åtgärdsprogram."
+   :"Fråga om extra anpassningar och, när det är aktuellt, särskilt stöd och åtgärdsprogram.",
+  transport:es()
+   ?"Comprueba los requisitos de Färdtjänst de tu municipio o región antes de solicitarla."
+   :"Kontrollera kraven för färdtjänst i din kommun eller region innan du ansöker.",
+  money:es()
+   ?"Revisa las prestaciones de Försäkringskassan que correspondan a la situación concreta."
+   :"Undersök vilka ersättningar från Försäkringskassan som kan vara aktuella i den konkreta situationen.",
+  housing:es()
+   ?"Comprueba si una discapacidad hace necesaria una adaptación de la vivienda y qué requisitos tiene el bostadsanpassningsbidrag."
+   :"Kontrollera om en funktionsnedsättning gör bostadsanpassning nödvändig och vilka krav som gäller för bostadsanpassningsbidrag.",
+  rejected:es()
+   ?"Lee la resolución, los motivos y el plazo para pedir omprövning o överklaga."
+   :"Läs beslutet, skälen och tidsfristen för omprövning eller överklagande."
  };
  const nextEs={
   assist:"Siguiente paso: describe ejemplos concretos de la ayuda necesaria, con frecuencia y duración, y comprueba la información oficial.",
@@ -202,7 +225,7 @@ window.stqCurrent=function(c){
  const keys=Object.keys(result);
  render(`<h2>⭐ ${es()?"Orientación inicial":"Första vägledning"}</h2>
  <p>${es()?"Según tus respuestas, estas son las áreas que merece la pena investigar primero:":"Utifrån dina svar är detta områden som kan vara värda att undersöka först:"}</p>
- ${vals.map((x,i)=>{const k=keys[i];const next=es()?nextEs[k]:nextSv[k];return `<div class="quizResult"><strong>${x[0]}</strong><br>${x[1]}<br><br><strong>${es()?"Qué hacer ahora:":"Vad du kan göra nu:"}</strong> ${next}<br><br><a href="${links[k]||"https://www.forsakringskassan.se/"}" target="_blank" rel="noopener">${es()?"Ver información oficial →":"Se officiell information →"}</a></div>`}).join("")}
+ ${vals.map((x,i)=>{const k=keys[i];const next=es()?nextEs[k]:nextSv[k];return `<div class="quizResult"><strong>${x[0]}</strong><br>${x[1]}<br><br><strong>${es()?"Qué comprobar:":"Vad du bör kontrollera:"}</strong> ${official[k]||""}<br><br><strong>${es()?"Qué hacer ahora:":"Vad du kan göra nu:"}</strong> ${next}<br><br><a href="${links[k]||"https://www.forsakringskassan.se/"}" target="_blank" rel="noopener">${es()?"Ver información oficial →":"Se officiell information →"}</a></div>`}).join("")}
  <div class="quizNote">ℹ️ ${es()?"Resultado orientativo. No determina si tienes derecho a una ayuda concreta. Comprueba siempre los requisitos oficiales.":"Detta är generell vägledning och avgör inte om du har rätt till en viss insats. Kontrollera alltid de officiella kraven."}</div>
  <button class="quizOption" onclick="start()">🔄 ${es()?"Nueva búsqueda":"Ny sökning"}</button>
  <button class="quizBack" onclick="closeStq()">← ${es()?"Cerrar":"Stäng"}</button>`);
