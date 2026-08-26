@@ -6,286 +6,241 @@
 <title>StödGuiden</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f8fc;color:#17324d}
-header{text-align:center;padding:24px 18px 12px;background:white}
-.logo{font-size:34px;font-weight:800;color:#24589b}
-.logo::before{content:"◉ ";font-size:24px}
-.subtitle{font-size:18px;margin:8px 0 18px}
-.langbar{display:flex;justify-content:center;gap:10px}
-.langbar button{border:1px solid #ccd5df;border-radius:28px;padding:11px 22px;background:white;font-size:17px;cursor:pointer}
-.langbar button.active{background:#2f61aa;color:white;border-color:#2f61aa}
-main{max-width:720px;margin:auto;padding:18px}
-h1{text-align:center;font-size:30px;margin:25px 0}
-.cards{display:grid;gap:14px}
-.card{width:100%;border:0;border-radius:24px;padding:19px 22px;background:#2f61aa;color:white;text-align:left;font-size:21px;font-weight:700;cursor:pointer;box-shadow:0 3px 8px #0002}
-.card:active{transform:scale(.99)}
-.screen{display:none;background:white;border-radius:20px;padding:22px;margin-top:20px;box-shadow:0 2px 10px #0001}
-.screen.active{display:block}
-.back{border:0;background:#e8eef6;color:#17324d;border-radius:14px;padding:10px 16px;font-size:16px;cursor:pointer}
-.option{display:block;width:100%;margin:12px 0;padding:15px;border:1px solid #ccd5df;border-radius:14px;background:#fff;text-align:left;font-size:17px;cursor:pointer}
-.result{margin-top:18px;padding:18px;background:#eef5ff;border-left:5px solid #2f61aa;border-radius:12px}
-a{color:#175da8}
-.small{font-size:14px;color:#5c6b79}
-ul{padding-left:22px}
+body{margin:0;font-family:Arial,sans-serif;background:#eef4f8;color:#18304a}
+.app{max-width:430px;margin:auto;min-height:100vh;background:#fff}
+header{padding:18px 20px 12px;text-align:center;background:linear-gradient(180deg,#f8fcff,#fff)}
+.logo{font-size:30px;font-weight:800;color:#194b91}.tag{font-size:15px;margin-top:6px}
+.langbar{display:flex;justify-content:center;gap:8px;margin:10px}
+.langbar button{border:1px solid #cbd6e2;background:#fff;border-radius:20px;padding:10px 15px;cursor:pointer;font-size:16px}
+.langbar .sel{background:#2855a3;color:#fff}
+.hero{padding:8px 20px 20px;text-align:center}.hero h1{font-size:24px;margin:10px 0 8px}
+.card{margin:0 16px 14px;padding:18px;border-radius:16px;background:#2855a3;color:white;font-size:18px;font-weight:700;cursor:pointer;box-shadow:0 3px 10px #0001}
+.card small{display:block;font-weight:400;margin-top:6px;font-size:13px}
+.screen{display:none;padding:18px}.screen.active{display:block}
+.back{border:0;background:none;color:#2855a3;font-size:16px;padding:4px 0 16px}
+label{display:block;font-weight:700;margin:18px 0 8px}
+select,textarea,input[type=number]{width:100%;padding:13px;border:1px solid #cbd6e2;border-radius:12px;font-size:16px;background:#fff}
+textarea{min-height:110px;resize:vertical}
+.checks label{font-weight:400;margin:8px 0;padding:11px;border:1px solid #dbe3ea;border-radius:10px}
+.checks input{width:auto;margin-right:8px}.primary{width:100%;border:0;border-radius:14px;padding:15px;background:#2855a3;color:white;font-size:17px;font-weight:700;margin-top:20px}
+.result{background:#f2f8f4;border-radius:14px;padding:16px;margin:12px 0;line-height:1.5}.result h3{margin-top:0}.result:first-child{border-left:5px solid #2855a3}
+.note{font-size:12px;color:#526273;line-height:1.5;margin-top:18px}
+.progress{font-size:13px;color:#526273;margin:8px 0}
 </style>
 </head>
 <body>
-<header>
-  <div class="logo" data-i18n="title">StödGuiden</div>
-  <div class="subtitle" data-i18n="subtitle">Hitta el apoyo adecuado para ti y tu familia.</div>
-  <div class="langbar">
-    <button id="svBtn" onclick="setLang('sv')">🇸🇪 Svenska</button>
-    <button id="esBtn" class="active" onclick="setLang('es')">🇪🇸 Español</button>
-  </div>
-</header>
+<div class="app">
+<header><div class="logo">◉ StödGuiden</div><div class="tag" id="tag"></div></header>
 
-<main>
-<section id="home" class="screen active">
-<h1 data-i18n="question">¿Qué necesitas ayuda con?</h1>
-<div class="cards">
-<button class="card" onclick="openCard('unknown')" data-i18n="unknown">🔎 No sé qué ayudas puedo solicitar</button>
-<button class="card" onclick="openCard('child')" data-i18n="child">👧 Ayudas para mi hijo</button>
-<button class="card" onclick="openCard('assist')" data-i18n="assist">♿ Personlig assistans</button>
-<button class="card" onclick="openCard('lss')" data-i18n="lss">📋 LSS</button>
-<button class="card" onclick="openCard('transport')" data-i18n="transport">🚕 Färdtjänst</button>
-<button class="card" onclick="openCard('school')" data-i18n="school">🏫 Escuela</button>
-<button class="card" onclick="openCard('housing')" data-i18n="housing">🏠 Vivienda</button>
-<button class="card" onclick="openCard('rejected')" data-i18n="rejected">❓ Me han rechazado una ayuda</button>
+<div class="langbar">
+<button id="sv" onclick="setLang('sv')">🇸🇪 Svenska</button>
+<button id="es" onclick="setLang('es')">🇪🇸 Español</button>
 </div>
-</section>
 
-<section id="detail" class="screen">
-<button class="back" onclick="goHome()" data-i18n="back">← Volver</button>
-<div id="detailContent"></div>
-</section>
-</main>
+<div id="home" class="screen active">
+<div class="hero"><h1 id="homeTitle"></h1></div>
+<div class="card" onclick="show('wizard')">🔎 <span id="c1"></span><small id="s1"></small></div>
+<div class="card" onclick="openCategory(1)">👧 <span id="c2"></span><small id="s2"></small></div>
+<div class="card" onclick="openCategory(2)">♿ <span id="c3"></span><small id="s3"></small></div>
+<div class="card" onclick="openCategory(3)">📋 <span id="c4"></span><small id="s4"></small></div>
+<div class="card" onclick="openCategory(4)">🚕 <span id="c5"></span><small id="s5"></small></div>
+<div class="card" onclick="openCategory(5)">🏫 <span id="c6"></span><small id="s6"></small></div>
+<div class="card" onclick="openCategory(6)">🏠 <span id="c7"></span><small id="s7"></small></div>
+<div class="card" onclick="openCategory(7)">⚖️ <span id="c8"></span><small id="s8"></small></div>
+</div>
+
+<div id="category" class="screen">
+<button class="back" onclick="show('home')" id="catBack"></button>
+<h2 id="catTitle"></h2><div id="catBox"></div>
+<button class="primary" onclick="show('wizard')" id="catWizardBtn"></button>
+<div class="note" id="catNote"></div>
+</div>
+
+<div id="wizard" class="screen">
+<button class="back" onclick="show('home')" id="back"></button>
+<h2 id="wTitle"></h2><p id="wIntro"></p>
+<div class="progress" id="progress"></div>
+
+<label id="whoLabel"></label><select id="who"></select>
+<label id="ageLabel"></label><input id="age" type="number" min="0" max="120">
+
+<label id="diffLabel"></label><div class="checks" id="checks"></div>
+<label id="dailyLabel"></label><div class="checks" id="dailyChecks"></div>
+<label id="schoolLabel"></label><div class="checks" id="schoolChecks"></div>
+<label id="travelLabel"></label><div class="checks" id="travelChecks"></div>
+<label id="nightLabel"></label><div class="checks" id="nightChecks"></div>
+<label id="supportLabel"></label><div class="checks" id="supportChecks"></div>
+
+<label id="storyLabel"></label><textarea id="story"></textarea>
+<button class="primary" onclick="analyze()" id="analyzeBtn"></button>
+</div>
+
+<div id="results" class="screen">
+<button class="back" onclick="show('wizard')" id="modify"></button>
+<h2 id="rTitle"></h2><p id="intro"></p><div id="resultsBox"></div>
+<button class="primary" id="payBtn"></button><div class="note" id="note"></div>
+</div>
+</div>
 
 <script>
-/* ===== CUESTIONARIO COMPLETO ===== */
-(function(){
-const s=document.createElement("style");
-s.textContent=`#helpQuizBtn{display:block;width:100%;margin:12px 0;padding:15px;border:0;border-radius:16px;background:#173b63;color:white;font-size:17px;font-weight:800;cursor:pointer}#helpQuiz{display:none;position:fixed;inset:0;z-index:10000;background:#f5f7fb;overflow:auto;padding:18px}#helpQuizCard{max-width:720px;margin:10px auto;background:white;border-radius:22px;padding:20px;box-shadow:0 8px 28px rgba(0,0,0,.14)}#helpQuizCard h2{color:#173b63;margin-top:0}.quizOption{display:block;width:100%;padding:14px;margin:9px 0;border:1px solid #d2dbe5;border-radius:13px;background:white;text-align:left;font-size:16px;cursor:pointer}.quizBack{width:100%;padding:13px;border:0;border-radius:13px;background:#e8eef6;color:#173b63;font-weight:700;margin-top:10px}.quizResult{background:#eef4ff;border-radius:16px;padding:15px;margin:12px 0;line-height:1.5}.quizResult a{display:inline-block;margin-top:8px;font-weight:700;color:#173b63}.quizDisclaimer{background:#fff5d9;border-radius:14px;padding:13px;line-height:1.45;margin-top:15px;font-size:14px}.quizProgress{font-size:13px;color:#65758a;margin-bottom:10px}`;
-document.head.appendChild(s);
-
-const b=document.createElement("button");
-b.id="helpQuizBtn";
-b.textContent="🔎 No sé qué ayudas puedo solicitar";
-
-const q=document.createElement("div");
-q.id="helpQuiz";
-q.innerHTML='<div id="helpQuizCard"><h2>🔎 Buscar posibles ayudas</h2><div id="quizContent"></div></div>';
-
-const m=document.querySelector("main");
-if(m)m.insertBefore(b,m.firstChild);else document.body.insertBefore(b,document.body.firstChild);
-document.body.appendChild(q);
-
-const state={person:null,age:null,needs:[],impact:[],transport:null};
-
-function render(x){document.getElementById("quizContent").innerHTML=x}
-function option(label,fn){return `<button class="quizOption" onclick="${fn}">${label}</button>`}
-
-function start(){
- state.person=null;state.age=null;state.needs=[];state.impact=[];state.transport=null;
- render(`<div class="quizProgress">Paso 1 de 5</div>
- <p><strong>¿Para quién buscas ayuda?</strong></p>
- ${option("👧 Para mi hijo/a","stqPerson('child')")}
- ${option("👤 Para mí / un adulto","stqPerson('adult')")}
- ${option("👨‍👩‍👧 Para mi familia","stqPerson('family')")}
- <button class="quizBack" onclick="closeStq()">← Volver</button>`);
-}
-
-window.stqPerson=function(p){
- state.person=p;
- render(`<div class="quizProgress">Paso 2 de 5</div>
- <p><strong>¿Qué edad tiene la persona?</strong></p>
- ${option("👶 0–5 años","stqAge('0-5')")}
- ${option("🧒 6–12 años","stqAge('6-12')")}
- ${option("👦 13–17 años","stqAge('13-17')")}
- ${option("🧑 18–29 años","stqAge('18-29')")}
- ${option("👨 30 años o más","stqAge('30+')")}
- <button class="quizBack" onclick="start()">← Atrás</button>`);
-};
-
-window.stqAge=function(a){
- state.age=a;
- render(`<div class="quizProgress">Paso 3 de 5</div>
- <p><strong>¿Qué necesidades quieres investigar?</strong><br><small>Puedes elegir una o varias.</small></p>
- ${option("♿ Discapacidad / necesidades de apoyo","stqToggle('disability')")}
- ${option("🧩 Autismo u otra condición del desarrollo","stqToggle('autism')")}
- ${option("🧠 Discapacidad intelectual","stqToggle('intellectual')")}
- ${option("🏫 Escuela / problemas de asistencia o apoyo","stqToggle('school')")}
- ${option("🤝 Ayuda importante en actividades diarias","stqToggle('daily')")}
- ${option("🚕 Dificultad para utilizar transporte público","stqToggle('transport')")}
- ${option("🏠 Adaptación o problemas de vivienda","stqToggle('housing')")}
- ${option("💰 Economía / prestaciones","stqToggle('money')")}
- <button class="quizBack" onclick="stqImpact()">Continuar →</button>
- <button class="quizBack" onclick="stqPerson(state.person)">← Atrás</button>`);
-};
-
-window.stqToggle=function(n){
- if(!state.needs.includes(n))state.needs.push(n);else state.needs=state.needs.filter(x=>x!==n);
- const el=document.getElementById("quizContent");
- const btns=el.querySelectorAll(".quizOption");
- const names={disability:"♿ Discapacidad / necesidades de apoyo",autism:"🧩 Autismo u otra condición del desarrollo",intellectual:"🧠 Discapacidad intelectual",school:"🏫 Escuela / problemas de asistencia o apoyo",daily:"🤝 Ayuda importante en actividades diarias",transport:"🚕 Dificultad para utilizar transporte público",housing:"🏠 Adaptación o problemas de vivienda",money:"💰 Economía / prestaciones"};
- btns.forEach(btn=>{for(const k in names)if(btn.textContent.includes(names[k]))btn.style.fontWeight=state.needs.includes(k)?"800":"400"});
-};
-
-window.stqImpact=function(){
- if(!state.needs.length){alert("Selecciona al menos una necesidad.");return}
- render(`<div class="quizProgress">Paso 4 de 5</div>
- <p><strong>¿Cómo afecta principalmente a la vida diaria?</strong></p>
- ${option("🔴 Necesita mucha ayuda o supervisión","stqImpactSet('high')")}
- ${option("🟠 Necesita ayuda algunas veces","stqImpactSet('medium')")}
- ${option("🟢 Necesita principalmente adaptaciones o información","stqImpactSet('low')")}
- <button class="quizBack" onclick="stqAge(state.age)">← Atrás</button>`);
-};
-
-window.stqImpactSet=function(x){
- state.impact=[x];
- render(`<div class="quizProgress">Paso 5 de 5</div>
- <p><strong>¿Hay dificultades importantes con el transporte?</strong></p>
- ${option("🚕 Sí, el transporte público es difícil","stqTransport('yes')")}
- ${option("🚌 No, puede utilizar transporte público","stqTransport('no')")}
- ${option("❓ No estoy seguro/a","stqTransport('unknown')")}
- <button class="quizBack" onclick="stqImpact()">← Atrás</button>`);
-};
-
-window.stqTransport=function(x){state.transport=x;showResults()};
-
-function showResults(){
- const results=[];
- const add=(title,text,url)=>{if(!results.some(r=>r[0]===title))results.push([title,text,url])};
-
- if(state.needs.includes("daily")||state.needs.includes("disability")||state.needs.includes("autism")||state.needs.includes("intellectual")){
-   add("♿ LSS / apoyo municipal","Investiga las medidas de apoyo que puede ofrecer el municipio según las necesidades y la situación de la persona.","https://www.socialstyrelsen.se/");
- }
- if(state.needs.includes("daily")&&(state.impact[0]==="high"||state.impact[0]==="medium")){
-   add("🤝 Personlig assistans / asistencia personal","Puede ser relevante cuando existen necesidades personales importantes y se cumplen los requisitos aplicables. Conviene valorar primero qué necesidades concretas existen y cuánto apoyo requieren.","https://www.forsakringskassan.se/");
- }
- if(state.needs.includes("school")||state.person==="child"){
-   add("🏫 Apoyo escolar","Investiga adaptaciones, apoyo especial, åtgärdsprogram y otras medidas educativas que puedan ser necesarias.","https://www.skolverket.se/");
- }
- if(state.needs.includes("transport")||state.transport==="yes"){
-   add("🚕 Färdtjänst","Puede ser relevante cuando una discapacidad hace difícil utilizar el transporte público y se cumplen los requisitos aplicables.","https://goteborg.se/");
- }
- if(state.needs.includes("housing")){
-   add("🏠 Bostadsanpassning","Investiga si puede solicitarse una adaptación de la vivienda debido a una discapacidad o limitación funcional.","https://www.boverket.se/");
- }
- if(state.needs.includes("money")){
-   add("💰 Försäkringskassan","Comprueba qué prestaciones pueden ser relevantes para la situación personal o familiar.","https://www.forsakringskassan.se/");
- }
- if(state.needs.includes("autism")||state.needs.includes("intellectual")||state.needs.includes("disability")){
-   add("📋 Försäkringskassan – prestaciones por discapacidad","Puede haber distintas prestaciones según edad, necesidades y circunstancias. Revisa las opciones oficiales antes de solicitar.","https://www.forsakringskassan.se/");
- }
- if(!results.length){
-   add("🔎 Orientación general","No hay información suficiente para señalar una ayuda concreta. Empieza describiendo las necesidades principales y consulta el organismo correspondiente.","https://www.forsakringskassan.se/");
- }
-
- render(`<h3>⭐ Según tus respuestas, investiga primero:</h3>
- ${results.map(r=>`<div class="quizResult"><strong>${r[0]}</strong><br>${r[1]}<br><a href="${r[2]}" target="_blank" rel="noopener">Ver información oficial →</a></div>`).join("")}
- <div class="quizDisclaimer">ℹ️ <strong>Resultado orientativo:</strong> este cuestionario no determina si tienes derecho a una prestación. Los requisitos dependen de la situación individual y de la autoridad que tramite la ayuda.</div>
- <button class="quizBack" onclick="start()">🔄 Nueva búsqueda</button>
- <button class="quizBack" onclick="closeStq()">← Cerrar</button>`);
-}
-window.closeStq=function(){q.style.display="none"};
-b.addEventListener("click",()=>{q.style.display="block";start();window.scrollTo(0,0)});
-})();
-
-/* ===== STÖDGUIDEN PREMIUM ===== */
-(function () {
-  const premiumStyle = document.createElement("style");
-  premiumStyle.textContent = `
-    #premiumBtn{display:block;width:100%;margin:18px 0;padding:16px;border:0;border-radius:18px;background:#d9a441;color:#172b4d;font-size:18px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12)}
-    #premiumBox{display:none;position:fixed;inset:0;z-index:9999;overflow:auto;background:#f5f7fb;padding:18px}
-    #premiumContent{max-width:720px;margin:15px auto;background:white;border-radius:24px;padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.16)}
-    #premiumContent h2{text-align:center;color:#173b63;margin:4px 0 8px}
-    .premiumIntro{text-align:center;line-height:1.5}
-    .premiumCard{background:#eef4ff;border-radius:18px;padding:18px;margin:13px 0}
-    .premiumCard h3{margin:0 0 8px;color:#173b63}
-    .premiumCard p{line-height:1.5;margin:0}
-    .premiumOption{display:block;width:100%;margin:9px 0;padding:13px;border:1px solid #ccd5df;border-radius:12px;background:white;text-align:left;font-size:16px;cursor:pointer}
-    .premiumClose{width:100%;padding:14px;margin-top:12px;border:0;border-radius:14px;background:#e8eef6;color:#173b63;font-size:17px;font-weight:700}
-    .premiumNote{background:#fff5d9;border-radius:15px;padding:15px;margin-top:15px;line-height:1.5}
-  `;
-  document.head.appendChild(premiumStyle);
-
-  const premiumBtn=document.createElement("button");
-  premiumBtn.id="premiumBtn";
-  premiumBtn.innerHTML="⭐ StödGuiden Premium";
-
-  const premiumBox=document.createElement("div");
-  premiumBox.id="premiumBox";
-  premiumBox.innerHTML=`
-    <div id="premiumContent">
-      <h2>⭐ StödGuiden Premium</h2>
-      <p class="premiumIntro">Herramientas prácticas para preparar mejor tus solicitudes de apoyo.</p>
-      <div class="premiumCard"><h3>📋 Guías paso a paso</h3><p>Organiza qué necesitas comprobar, qué documentación preparar y qué pasos seguir antes de contactar con una autoridad.</p></div>
-      <div class="premiumCard"><h3>✉️ Modelos de mensajes</h3><p>Modelos orientativos para contactar con escuela, municipio, Försäkringskassan y otros organismos.</p></div>
-      <div class="premiumCard"><h3>📝 Preparar una solicitud</h3><p>Ayuda para ordenar necesidades, frecuencia, duración, documentación y preguntas que conviene preparar.</p></div>
-      <div class="premiumCard"><h3>🏫 Escuela</h3><p>Orientación para hablar con la escuela sobre adaptaciones, apoyo especial y necesidades del alumno.</p></div>
-      <div class="premiumCard"><h3>♿ LSS y asistencia personal</h3><p>Explicaciones organizadas sobre las áreas de apoyo que puedes investigar y cómo preparar una consulta.</p></div>
-      <div class="premiumCard"><h3>🚕 Färdtjänst</h3><p>Información orientativa sobre dificultades de transporte, documentación y dónde buscar los requisitos aplicables.</p></div>
-      <div class="premiumCard"><h3>❌ Si te han rechazado una ayuda</h3><p>Qué revisar en la resolución, qué documentos guardar y qué preguntas hacer sobre una posible revisión o recurso.</p></div>
-      <div class="premiumCard"><h3>⭐ Orientación personalizada</h3><p>Haz una pequeña prueba para recibir una orientación inicial.</p><button class="premiumOption" onclick="premiumStart()">Empezar orientación</button><div id="premiumArea"></div></div>
-      <div class="premiumNote">🔒 <strong>Fase de prueba:</strong> esta función todavía es gratuita. Primero queremos comprobar qué herramientas resultan realmente útiles para las familias.</div>
-      <button class="premiumClose" onclick="document.getElementById('premiumBox').style.display='none'">← Volver</button>
-    </div>`;
-
-  document.body.appendChild(premiumBox);
-  document.body.appendChild(premiumBtn);
-
-  premiumBtn.addEventListener("click",function(){
-    premiumBox.style.display="block";
-    window.scrollTo(0,0);
-  });
-
-  window.premiumStart=function(){
-    const es=lang==="es";
-    document.getElementById("premiumArea").innerHTML=`<div class="premiumCard"><strong>${es?"1. ¿Para quién buscas apoyo?":"1. Vem söker du stöd för?"}</strong><button class="premiumOption" onclick="premiumNeed()">${es?"👧 Mi hijo/a":"👧 Mitt barn"}</button><button class="premiumOption" onclick="premiumNeed()">${es?"👤 Un adulto":"👤 En vuxen"}</button></div>`;
-  };
-
-  window.premiumNeed=function(){
-    const es=lang==="es";
-    document.getElementById("premiumArea").innerHTML=`<div class="premiumCard"><strong>${es?"2. ¿Qué necesitas principalmente?":"2. Vad behöver du främst hjälp med?"}</strong><button class="premiumOption" onclick="premiumResult('school')">${es?"🏫 Escuela":"🏫 Skola"}</button><button class="premiumOption" onclick="premiumResult('daily')">${es?"🤝 Ayuda en la vida diaria":"🤝 Stöd i vardagen"}</button><button class="premiumOption" onclick="premiumResult('transport')">${es?"🚕 Transporte":"🚕 Transport"}</button><button class="premiumOption" onclick="premiumResult('money')">${es?"💰 Ayudas económicas":"💰 Ekonomiskt stöd"}</button></div>`;
-  };
-
-  window.premiumResult=function(type){
-    const es=lang==="es";
-    const advice=es?{
-      school:"Revisa el apoyo escolar y las adaptaciones disponibles. Documenta las necesidades y solicita una reunión con la escuela.",
-      daily:"Investiga LSS y, si existen necesidades personales importantes y duraderas, la posibilidad de asistencia personal.",
-      transport:"Comprueba si Färdtjänst puede ser aplicable y consulta los requisitos de tu municipio o región.",
-      money:"Comprueba qué prestaciones de Försäkringskassan pueden ser relevantes para tu situación."
-    }:{
-      school:"Undersök skolans stöd och anpassningar. Dokumentera behoven och be om ett möte med skolan.",
-      daily:"Undersök LSS och, om det finns omfattande och varaktiga personliga behov, möjligheten till personlig assistans.",
-      transport:"Kontrollera om färdtjänst kan vara aktuell och vilka krav som gäller i din kommun eller region.",
-      money:"Undersök vilka ersättningar från Försäkringskassan som kan vara aktuella."
-    };
-    document.getElementById("premiumArea").innerHTML=`<div class="premiumCard"><h3>${es?"⭐ Tu orientación inicial":"⭐ Din första vägledning"}</h3><p>${advice[type]}</p><p class="small">${es?"Esta orientación es general y no garantiza el derecho a una ayuda concreta.":"Detta är generell vägledning och garanterar inte rätt till en viss insats."}</p></div>`;
-  };
-})();
-
-
-/* ===== IDIOMAS ===== */
 const T={
- es:{title:'StödGuiden',subtitle:'Halla el apoyo adecuado para ti y tu familia.',question:'¿Qué necesitas ayuda con?',unknown:'🔎 No sé qué ayudas puedo solicitar',child:'👧 Ayudas para mi hijo',assist:'♿ Asistencia personal',lss:'📋 LSS',transport:'🚕 Färdtjänst',school:'🏫 Escuela',housing:'🏠 Vivienda',rejected:'❓ Me han rechazado una ayuda',back:'← Volver',titles:{unknown:'No sé qué ayudas puedo solicitar',child:'Ayudas para mi hijo',assist:'Asistencia personal',lss:'LSS',transport:'Färdtjänst',school:'Escuela',housing:'Vivienda',rejected:'Me han rechazado una ayuda'},body:{unknown:'Aquí puedes utilizar el cuestionario para orientarte sobre qué apoyos puede ser útil investigar según tu situación.',child:'Aquí puedes orientarte sobre apoyos que una familia puede investigar según las necesidades del niño o adolescente.',assist:'La asistencia personal puede ser relevante cuando existen necesidades importantes y duraderas de ayuda personal y se cumplen los requisitos aplicables.',lss:'LSS es una ley sueca que regula determinados apoyos para personas con discapacidad.',transport:'Färdtjänst es transporte especial para personas que tienen dificultades importantes para viajar con el transporte público ordinario.',school:'Si un niño necesita apoyo en la escuela, es importante hablar con la escuela y documentar las necesidades.',housing:'Algunas personas pueden necesitar adaptaciones o apoyos relacionados con la vivienda.',rejected:'Si has recibido una decisión negativa, primero revisa la resolución y los motivos indicados.'}},
- sv:{title:'StödGuiden',subtitle:'Hitta rätt stöd för dig och din familj.',question:'Vad behöver du hjälp med?',unknown:'🔎 Jag vet inte vilket stöd jag kan söka',child:'👧 Stöd för mitt barn',assist:'♿ Personlig assistans',lss:'📋 LSS',transport:'🚕 Färdtjänst',school:'🏫 Skola',housing:'🏠 Bostad',rejected:'❓ Jag har fått avslag på stöd',back:'← Tillbaka',titles:{unknown:'Jag vet inte vilket stöd jag kan söka',child:'Stöd för mitt barn',assist:'Personlig assistans',lss:'LSS',transport:'Färdtjänst',school:'Skola',housing:'Bostad',rejected:'Jag har fått avslag på stöd'},body:{unknown:'Här kan du använda frågeformuläret för att få en första vägledning om vilket stöd som kan vara relevant att undersöka utifrån din situation.',child:'Här kan du få en första orientering om stöd som en familj kan undersöka utifrån barnets behov.',assist:'Personlig assistans kan vara aktuell när en person har omfattande och varaktiga behov av personlig hjälp och kraven är uppfyllda.',lss:'LSS är en svensk lag som reglerar vissa stödinsatser för personer med funktionsnedsättning.',transport:'Färdtjänst är särskild kollektivtrafik för personer som har betydande svårigheter att resa med vanlig kollektivtrafik.',school:'Om ett barn behöver stöd i skolan är det viktigt att prata med skolan och dokumentera behoven.',housing:'Vissa personer kan behöva anpassningar eller stöd som rör bostaden.',rejected:'Om du har fått ett negativt beslut bör du först läsa beslutet och skälen som anges.'}}
-};
-let lang='es';
-function setLang(l){
- lang=l;
- const t=T[l];
- document.documentElement.lang=l;
- document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k])el.textContent=t[k]});
- const sv=document.getElementById('svBtn'), es=document.getElementById('esBtn');
- if(sv)sv.classList.toggle('active',l==='sv');
- if(es)es.classList.toggle('active',l==='es');
- const quizBtn=document.getElementById('helpQuizBtn');
- if(quizBtn)quizBtn.textContent=l==='sv'?'🔎 Jag vet inte vilket stöd jag kan söka':'🔎 No sé qué ayudas puedo solicitar';
- if(document.getElementById('detail')?.classList.contains('active') && window.currentCard)openCard(window.currentCard);
+es:{
+tag:"Halla el apoyo adecuado para ti y tu familia.",home:"¿Con qué necesitas ayuda?",
+c:["No sé qué ayudas puedo solicitar","Ayudas para mi hijo","Asistencia personal","LSS","Färdtjänst","Escuela","Vivienda","Me han rechazado una ayuda"],
+back:"← Volver",wt:"Vamos a conocerte un poco",wi:"Responde estas preguntas. No necesitas conocer el nombre de ninguna prestación.",
+wl:"¿Para quién buscas ayuda?",opts:["Mi hijo/a","Para mí","Otro familiar"],al:"Edad",dl:"¿Qué dificultades existen?",
+sl:"Cuéntanos con tus palabras qué está pasando",ph:"Escribe aquí la situación diaria y qué ayuda necesitas...",ab:"Ver posibles apoyos",
+mod:"← Modificar respuestas",rt:"Posibles apoyos a investigar",pay:"📄 Preparar mi solicitud personalizada — 9,90 €",
+note:"Esta orientación no garantiza que tengas derecho a una prestación. Las decisiones corresponden a la autoridad competente.",
+diff:["Autismo","Discapacidad intelectual","Movilidad / desplazamientos","Necesidad de supervisión","Dificultades en la escuela","Necesidad de ayuda personal"],
+res:["♿ Personlig assistans","Podría ser relevante investigar si existe una necesidad importante y duradera de ayuda personal.","📋 LSS","Conviene comprobar qué apoyos pueden ser aplicables según la situación y las condiciones legales.","🚕 Färdtjänst","Puede ser útil investigar el transporte adaptado si existen dificultades importantes para desplazarse por medios ordinarios.","🏫 Apoyo escolar","Puede ser necesario hablar con la escuela y el municipio sobre las medidas de apoyo que correspondan."]
+},
+sv:{
+tag:"Hitta rätt stöd för dig och din familj.",home:"Vad behöver du hjälp med?",
+c:["Jag vet inte vilket stöd jag kan söka","Stöd för mitt barn","Personlig assistans","LSS","Färdtjänst","Skola","Bostad","Jag har fått avslag på stöd"],
+back:"← Tillbaka",wt:"Berätta lite om din situation",wi:"Svara på frågorna. Du behöver inte känna till namnet på någon insats.",
+wl:"Vem söker du stöd för?",opts:["Mitt barn","För mig själv","Annan familjemedlem"],al:"Ålder",dl:"Vilka svårigheter finns?",
+sl:"Berätta med egna ord vad som händer",ph:"Beskriv vardagen och vilket stöd som behövs...",ab:"Se möjliga stöd",
+mod:"← Ändra svar",rt:"Möjliga stöd att undersöka",pay:"📄 Förbered min personliga ansökan — 9,90 €",
+note:"Denna vägledning garanterar inte att du har rätt till en insats. Beslut fattas av ansvarig myndighet.",
+diff:["Autism","Intellektuell funktionsnedsättning","Rörlighet / resor","Behov av tillsyn","Svårigheter i skolan","Behov av personlig hjälp"],
+res:["♿ Personlig assistans","Det kan vara relevant att undersöka om det finns ett omfattande och varaktigt behov av personlig hjälp.","📋 LSS","Det är bra att kontrollera vilka stödinsatser som kan vara aktuella utifrån situationen och lagens villkor.","🚕 Färdtjänst","Det kan vara relevant att undersöka färdtjänst om det finns betydande svårigheter att resa med vanlig kollektivtrafik.","🏫 Stöd i skolan","Det kan vara bra att kontakta skolan och kommunen om vilka stödåtgärder som kan vara aktuella."]
+}};
+
+const Q={
+es:{
+dailyLabel:"¿Qué ayuda necesita en la vida diaria?",daily:["Ayuda para higiene, vestirse o comer","Ayuda para supervisión y seguridad","Ayuda para actividades y rutinas","No necesita ayuda diaria"],
+schoolLabel:"¿Hay dificultades relacionadas con la escuela?",school:["Necesita adaptaciones o apoyo educativo","Tiene dificultades para asistir a la escuela","Necesita apoyo durante el transporte escolar","No hay dificultades escolares"],
+travelLabel:"¿Cómo funcionan los desplazamientos?",travel:["Es difícil utilizar transporte público","Necesita Färdtjänst o más viajes","Necesita acompañamiento durante los desplazamientos","No tiene dificultades importantes para desplazarse"],
+nightLabel:"¿Existe necesidad de ayuda o supervisión por la noche?",night:["Se despierta y necesita ayuda","Necesita supervisión o seguridad durante la noche","Hay episodios que requieren atención","No necesita ayuda por la noche"],
+supportLabel:"¿Qué situación tienes actualmente?",support:["Ya recibo alguna ayuda y necesito más","Estoy esperando una decisión","Me han rechazado una ayuda","Todavía no he solicitado ninguna ayuda"],
+progress:"Preguntas sobre las necesidades y la situación actual."
+},
+sv:{
+dailyLabel:"Vilken hjälp behövs i vardagen?",daily:["Hjälp med hygien, påklädning eller mat","Hjälp med tillsyn och säkerhet","Hjälp med aktiviteter och rutiner","Behöver ingen daglig hjälp"],
+schoolLabel:"Finns det svårigheter som rör skolan?",school:["Behöver anpassningar eller pedagogiskt stöd","Har svårt att gå till skolan","Behöver stöd under skolresan","Inga särskilda skolsvårigheter"],
+travelLabel:"Hur fungerar resorna?",travel:["Det är svårt att använda kollektivtrafik","Behöver Färdtjänst eller fler resor","Behöver ledsagning under resor","Har inga större resesvårigheter"],
+nightLabel:"Finns det behov av hjälp eller tillsyn på natten?",night:["Vaknar och behöver hjälp","Behöver tillsyn eller trygghet på natten","Har episoder som kräver uppmärksamhet","Behöver ingen hjälp på natten"],
+supportLabel:"Vilken situation har du nu?",support:["Har redan stöd men behöver mer","Väntar på ett beslut","Har fått avslag på stöd","Har ännu inte ansökt om stöd"],
+progress:"Frågor om behov och nuvarande situation."
+}};
+
+const CAT_SUB={
+es:["Abrir asistente","Orientación inicial","Información general","Información general","Información general","Información general","Información general","Información general"],
+sv:["Öppna assistenten","Första vägledning","Allmän information","Allmän information","Allmän information","Allmän information","Allmän information","Allmän information"]};
+
+const CATS={
+es:[
+{title:"Ayudas para mi hijo",intro:"Aquí puedes orientarte sobre apoyos que una familia puede investigar según las necesidades del niño o adolescente.",items:["Personlig assistans / asistencia personal: puede ser relevante cuando existe una necesidad importante y duradera de ayuda personal.","LSS: conviene comprobar qué medidas de apoyo pueden ser aplicables a la situación concreta.","Escuela: la escuela y el municipio pueden informar sobre medidas de apoyo educativo y adaptaciones.","Färdtjänst: puede ser relevante si el transporte ordinario resulta especialmente difícil."]},
+{title:"Asistencia personal",intro:"La asistencia personal puede ser una opción cuando una persona tiene necesidades importantes y duraderas de ayuda personal.",items:["Investiga si las necesidades de ayuda entran dentro de las condiciones de la asistencia personal.","Comprueba qué autoridad es responsable de la solicitud según la situación.","Guarda información sobre las necesidades en la vida diaria, frecuencia y duración de la ayuda."]},
+{title:"LSS",intro:"LSS es una ley sueca que regula determinados apoyos para personas con discapacidad.",items:["Comprueba si la persona pertenece a alguno de los grupos previstos por la ley.","Investiga qué medidas pueden ser relevantes, por ejemplo acompañamiento, contacto personal u otras ayudas.","La autoridad competente realiza la valoración individual."]},
+{title:"Färdtjänst",intro:"Färdtjänst es transporte especial para personas que tienen dificultades importantes para viajar con el transporte público ordinario.",items:["Comprueba los requisitos de tu municipio o región.","Describe qué dificultades existen al viajar de forma habitual.","La decisión depende de una valoración individual."]},
+{title:"Escuela",intro:"Si un niño necesita apoyo en la escuela, es importante hablar con la escuela y documentar las necesidades.",items:["Pide una reunión con la escuela para explicar las dificultades concretas.","Pregunta qué adaptaciones y medidas de apoyo pueden ofrecerse.","Guarda por escrito las decisiones y los apoyos acordados."]},
+{title:"Vivienda",intro:"Algunas personas pueden necesitar adaptaciones o apoyos relacionados con la vivienda.",items:["Describe qué dificultades existen en casa y qué adaptación se necesita.","Comprueba con el municipio qué ayudas pueden existir.","Solicita información por escrito sobre requisitos y documentación."]},
+{title:"Me han rechazado una ayuda",intro:"Si has recibido una decisión negativa, primero revisa la resolución y los motivos indicados.",items:["Lee qué autoridad ha tomado la decisión y cuál es el motivo del rechazo.","Comprueba si la resolución indica cómo y cuándo puedes recurrir.","Guarda la resolución y toda la documentación relacionada."]}],
+sv:[
+{title:"Stöd för mitt barn",intro:"Här kan du få en första orientering om stöd som en familj kan undersöka utifrån barnets behov.",items:["Personlig assistans kan vara relevant när det finns ett omfattande och varaktigt behov av personlig hjälp.","LSS: kontrollera vilka stödinsatser som kan vara aktuella i den konkreta situationen.","Skola: skolan och kommunen kan informera om stödåtgärder och anpassningar.","Färdtjänst: kan vara relevant om vanlig kollektivtrafik är särskilt svår."]},
+{title:"Personlig assistans",intro:"Personlig assistans kan vara aktuell när en person har omfattande och varaktiga behov av personlig hjälp.",items:["Undersök om hjälpbehoven omfattas av reglerna för personlig assistans.","Kontrollera vilken myndighet som ansvarar för ansökan i den aktuella situationen.","Dokumentera hjälpbehovens omfattning, frekvens och varaktighet."]},
+{title:"LSS",intro:"LSS är en svensk lag som reglerar vissa stödinsatser för personer med funktionsnedsättning.",items:["Kontrollera om personen tillhör någon av de personkretsar som omfattas av lagen.","Undersök vilka insatser som kan vara relevanta, till exempel ledsagning, kontaktperson eller annat stöd.","Ansvarig myndighet gör en individuell bedömning."]},
+{title:"Färdtjänst",intro:"Färdtjänst är särskild kollektivtrafik för personer som har betydande svårigheter att resa med vanlig kollektivtrafik.",items:["Kontrollera vilka krav som gäller i din kommun eller region.","Beskriv vilka svårigheter som finns vid vanliga resor.","Beslutet grundas på en individuell bedömning."]},
+{title:"Skola",intro:"Om ett barn behöver stöd i skolan är det viktigt att prata med skolan och dokumentera behoven.",items:["Be om ett möte med skolan och beskriv de konkreta svårigheterna.","Fråga vilka anpassningar och stödåtgärder som kan erbjudas.","Spara skriftlig information om beslutade stödåtgärder."]},
+{title:"Bostad",intro:"Vissa personer kan behöva anpassningar eller stöd som rör bostaden.",items:["Beskriv vilka svårigheter som finns i hemmet och vilken anpassning som behövs.","Kontrollera med kommunen vilka stöd som kan finnas.","Be om skriftlig information om krav och dokumentation."]},
+{title:"Jag har fått avslag på stöd",intro:"Om du har fått ett negativt beslut bör du först läsa beslutet och skälen som anges.",items:["Kontrollera vilken myndighet som fattat beslutet och varför ansökan avslogs.","Se om beslutet beskriver hur och när du kan överklaga.","Spara beslutet och all dokumentation som hör till ärendet."]}]};
+
+let lang="es";
+
+function fillChecks(id,items){document.getElementById(id).innerHTML=items.map((x,i)=>`<label><input type="checkbox" value="${i}"> ${x}</label>`).join("")}
+function checked(id){return [...document.querySelectorAll("#"+id+" input:checked")].map(x=>+x.value)}
+function makeExclusive(id, noneIndex){
+  const box=document.getElementById(id);
+  box.addEventListener("change",e=>{
+    if(!e.target.matches("input")) return;
+    const inputs=[...box.querySelectorAll("input")];
+    if(e.target.checked && +e.target.value===noneIndex){
+      inputs.forEach(x=>{if(x!==e.target)x.checked=false});
+    }else if(e.target.checked && noneIndex!==undefined){
+      const none=inputs.find(x=>+x.value===noneIndex);
+      if(none) none.checked=false;
+    }
+  });
 }
 
+function setLang(l){
+lang=l;const t=T[l],q=Q[l];document.documentElement.lang=l;
+document.getElementById("tag").textContent=t.tag;document.getElementById("homeTitle").textContent=t.home;
+for(let i=1;i<=8;i++){document.getElementById("c"+i).textContent=t.c[i-1];document.getElementById("s"+i).textContent=CAT_SUB[l][i-1]}
+document.getElementById("back").textContent=t.back;document.getElementById("wTitle").textContent=t.wt;document.getElementById("wIntro").textContent=t.wi;
+document.getElementById("whoLabel").textContent=t.wl;document.getElementById("ageLabel").textContent=t.al;document.getElementById("diffLabel").textContent=t.dl;
+document.getElementById("storyLabel").textContent=t.sl;document.getElementById("story").placeholder=t.ph;document.getElementById("analyzeBtn").textContent=t.ab;
+document.getElementById("modify").textContent=t.mod;document.getElementById("rTitle").textContent=t.rt;document.getElementById("payBtn").textContent=t.pay;document.getElementById("note").textContent=t.note;
+document.getElementById("progress").textContent=q.progress;
+document.getElementById("who").innerHTML=t.opts.map(x=>`<option>${x}</option>`).join("");
+fillChecks("checks",t.diff);
+document.getElementById("dailyLabel").textContent=q.dailyLabel;fillChecks("dailyChecks",q.daily);
+document.getElementById("schoolLabel").textContent=q.schoolLabel;fillChecks("schoolChecks",q.school);
+document.getElementById("travelLabel").textContent=q.travelLabel;fillChecks("travelChecks",q.travel);
+document.getElementById("nightLabel").textContent=q.nightLabel;fillChecks("nightChecks",q.night);
+document.getElementById("supportLabel").textContent=q.supportLabel;fillChecks("supportChecks",q.support);
+document.getElementById("sv").className=l==="sv"?"sel":"";
+document.getElementById("es").className=l==="es"?"sel":"";
+}
+
+function show(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");scrollTo(0,0)}
+
+function openCategory(i){
+const c=CATS[lang][i-1];
+document.getElementById("catTitle").textContent=c.title;
+document.getElementById("catBox").innerHTML=`<p>${c.intro}</p>${c.items.map(x=>`<div class="result">${x}</div>`).join("")}`;
+document.getElementById("catBack").textContent=T[lang].back;
+document.getElementById("catWizardBtn").textContent=lang==="es"?"🔎 Abrir el asistente":"🔎 Öppna assistenten";
+document.getElementById("catNote").textContent=T[lang].note;show("category");
+}
+
+function analyze(){
+const t=T[lang],c=checked("checks"),d=checked("dailyChecks"),s=checked("schoolChecks"),tr=checked("travelChecks"),n=checked("nightChecks"),sp=checked("supportChecks");
+let items=[];const add=(a,b)=>items.push([a,b]);
+
+if(c.some(x=>[0,1,3,5].includes(x))||d.some(x=>[0,1,2].includes(x))||n.some(x=>[0,1,2].includes(x)))add(t.res[0],t.res[1]);
+if(c.includes(0)||c.includes(1)||d.some(x=>[0,1].includes(x)))add(t.res[2],t.res[3]);
+if(c.includes(2)||tr.some(x=>[0,1,2].includes(x)))add(t.res[4],t.res[5]);
+if(c.includes(4)||s.some(x=>[0,1,2].includes(x)))add(t.res[6],t.res[7]);
+
+if(sp.includes(2))add(lang==="es"?"⚖️ Revisar el rechazo":"⚖️ Gå igenom avslaget",
+lang==="es"?"Revisa la resolución, los motivos y el plazo indicado para recurrir.":"Gå igenom beslutet, skälen och den angivna tiden för att överklaga.");
+if(s.some(x=>[0,1,2].includes(x)))add(lang==="es"?"🏫 Apoyo escolar":"🏫 Stöd i skolan",
+lang==="es"?"Puede ser útil pedir a la escuela que documente las necesidades y las medidas de apoyo.":"Det kan vara bra att be skolan dokumentera behoven och stödåtgärderna.");
+if(n.some(x=>[0,1,2].includes(x)))add(lang==="es"?"🌙 Necesidades nocturnas":"🌙 Behov på natten",
+lang==="es"?"Anota frecuencia, duración y tipo de ayuda necesaria durante la noche.":"Dokumentera hur ofta, hur länge och vilken hjälp som behövs på natten.");
+
+if(!items.length)items=[[lang==="es"?"🔎 Evaluación inicial":"🔎 Inledande bedömning",
+lang==="es"?"Con más información podremos identificar qué apoyos conviene investigar.":"Med mer information kan vi identifiera vilket stöd som kan vara relevant att undersöka."]];
+
+items = items.filter((item,index,self)=>index===self.findIndex(x=>x[0]===item[0]));
+
+if(lang==="es"){
+  items.sort((a,b)=>{
+    const order=["♿","📋","🚕","🏫","⚖️","🌙","🔎"];
+    return order.findIndex(x=>b[0].startsWith(x))-order.findIndex(x=>a[0].startsWith(x));
+  });
+}else{
+  items.sort((a,b)=>{
+    const order=["♿","📋","🚕","🏫","⚖️","🌙","🔎"];
+    return order.findIndex(x=>b[0].startsWith(x))-order.findIndex(x=>a[0].startsWith(x));
+  });
+}
+
+document.getElementById("intro").textContent=lang==="es"?"Según tus respuestas, estas son áreas que podrías investigar:":"Utifrån dina svar är detta stöd som du kan behöva undersöka:";
+document.getElementById("resultsBox").innerHTML=items.map(i=>`<div class="result"><h3>${i[0]}</h3><div>${i[1]}</div></div>`).join("");
+show("results");
+}
+
+document.getElementById("payBtn").onclick=()=>alert(lang==="es"?"El pago se activará en una fase posterior. Por ahora estamos probando la idea gratis.":"Betalningen aktiveras i ett senare steg. Just nu testar vi idén gratis.");
+
+setLang("es");
+["dailyChecks","schoolChecks","travelChecks","nightChecks","supportChecks"].forEach(id=>{
+  const noneIndex = id==="dailyChecks"?3:id==="schoolChecks"?3:id==="travelChecks"?3:id==="nightChecks"?3:undefined;
+  makeExclusive(id,noneIndex);
+});
 </script>
 </body>
 </html>
