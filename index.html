@@ -67,7 +67,7 @@ ul{padding-left:22px}
 
 <main>
 <section id="home" class="screen active">
-  <h1 data-i18n="question">¿Qué necesitas ayuda con?</h1>
+  <h1 data-i18n="question">¿Con qué necesitas ayuda?</h1>
   <div class="cards">
     <button class="card" data-card="unknown" data-i18n="unknown">🔎 No sé qué ayudas puedo solicitar</button>
     <button class="card" data-card="child" data-i18n="child">👧 Ayudas para mi hijo</button>
@@ -86,12 +86,31 @@ ul{padding-left:22px}
 </section>
 </main>
 
+<section id="v2Info" class="screen">
+  <button class="back" onclick="goHome()">← Volver</button>
+  <h1>StödGuiden V2</h1>
+  <div class="result">
+    <h2>Información útil para familias</h2>
+    <p>StödGuiden reúne información orientativa sobre ayudas y apoyos en Suecia. La aplicación no decide si tienes derecho a una prestación: siempre hay que comprobar los requisitos con la autoridad correspondiente.</p>
+    <h3>Försäkringskassan</h3>
+    <p>Puede ser relevante revisar prestaciones como <strong>omvårdnadsbidrag</strong>, <strong>merkostnadsersättning</strong> y <strong>assistansersättning</strong>, según las necesidades y circunstancias.</p>
+    <h3>LSS y Personlig assistans</h3>
+    <p>Las necesidades deben describirse de forma concreta: qué ayuda necesita la persona, con qué frecuencia, cuánto tiempo dura y qué ocurre si no recibe esa ayuda.</p>
+    <h3>Färdtjänst</h3>
+    <p>El diagnóstico por sí solo no determina el derecho. Se valoran las dificultades reales para desplazarse y utilizar el transporte público.</p>
+    <h3>Escuela</h3>
+    <p>Cuando un alumno necesita apoyo, pueden ser relevantes las extra anpassningar, särskilt stöd y åtgärdsprogram. Es importante documentar las necesidades y las medidas que se han probado.</p>
+    <h3>Si recibes un rechazo</h3>
+    <p>Lee la resolución completa, comprueba los motivos y el plazo para solicitar omprövning o recurrir. Guarda siempre la resolución y la documentación enviada.</p>
+  </div>
+</section>
+
 <script>
 const T={
 es:{
  title:"StödGuiden",
  subtitle:"Halla el apoyo adecuado para ti y tu familia.",
- question:"¿Qué necesitas ayuda con?",
+ question:"¿Con qué necesitas ayuda?",
  back:"← Volver",
  unknown:"🔎 No sé qué ayudas puedo solicitar",
  child:"👧 Ayudas para mi hijo",
